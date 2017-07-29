@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="字符串," />
+  <meta name="keywords" content="其他," />
 
 
 
@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="求最长回文子串。 字面意思 这么求？？">
-<meta name="keywords" content="字符串">
+<meta name="description" content="搞了这么久，总算告一段落了。">
+<meta name="keywords" content="其他">
 <meta property="og:type" content="article">
-<meta property="og:title" content="manacher">
-<meta property="og:url" content="http://yoursite.com/manacher/index.html">
+<meta property="og:title" content="新博客的第一篇博文">
+<meta property="og:url" content="http://yoursite.com/新博客上线第一篇博文/index.html">
 <meta property="og:site_name" content="YKgsmUDq&#39;blog">
-<meta property="og:description" content="求最长回文子串。 字面意思 这么求？？">
+<meta property="og:description" content="搞了这么久，总算告一段落了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-29T12:38:11.260Z">
+<meta property="og:updated_time" content="2017-07-29T12:56:51.709Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="manacher">
-<meta name="twitter:description" content="求最长回文子串。 字面意思 这么求？？">
+<meta name="twitter:title" content="新博客的第一篇博文">
+<meta name="twitter:description" content="搞了这么久，总算告一段落了。">
 
 
 
@@ -126,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/manacher/"/>
+  <link rel="canonical" href="http://yoursite.com/新博客上线第一篇博文/"/>
 
 
 
 
 
-  <title> manacher | YKgsmUDq'blog </title>
+  <title> 新博客的第一篇博文 | YKgsmUDq'blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +251,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/manacher/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/新博客上线第一篇博文/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YKgsmUDq">
@@ -272,7 +272,7 @@
             
             
               
-                manacher
+                新博客的第一篇博文
               
             
           </h1>
@@ -287,8 +287,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T19:00:42+08:00">
-                2017-07-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-29T20:09:16+08:00">
+                2017-07-29
               </time>
             
 
@@ -310,8 +310,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
                   </a>
                 </span>
 
@@ -350,30 +350,9 @@
       
 
       
-        <p>求最长回文子串。</p>
-<p>字面意思</p>
-<p>这么求？？</p>
+        <p>搞了这么久，总算告一段落了。</p>
 <a id="more"></a>
-<p>暴力：</p>
-<p>枚举某个点为回文中心，向两边扩展。（在每个字符中间再插一个没出现过的字符以保证回文子串长度为偶数的情况）</p>
-<p>时间复杂度：$O(N^2)$</p>
-<p>然而可以线性时间。</p>
-<p>$F_i$表示以$i$点为中心时的回文子串半径最大：cabac以b为中心的回文串的半径$r$为2</p>
-<p>根据回文串的性质：左右对称</p>
-<p>我们可以得出在<strong>某一个回文串中</strong>，以它回文中心右边的某个点为回文中心的最长回文子串长度不小于以它左边对称点为中心的最长回文子串的长度</p>
-<p>于是：</p>
-<p>当$i&gt;P$且$i\le P+r$时（$P$为当前的中心）</p>
-<p>有$F<em>i\ge F</em>{P-r}​$</p>
-<p>在这基础上再向左右扩展</p>
-<p>当然，还有一些特殊情况：出界，右边的回文串长一些（cccbcc中b为中心，最右边）等。。。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">F[i]=max( <span class="number">0</span>,min( F[<span class="number">2</span>*p-i],p+F[p]-i ) );</div></pre></td></tr></table></figure>
-<p>理解一下这条语句$2*p-i$原型是$p-(i-p)$</p>
-<p>在此基础上再向左右扩展下去</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(s[i-F[i]]==s[i+F[i]]) F[i]++;</div></pre></td></tr></table></figure>
-<p>当以新的$i$点为中心的最长回文子串的边界超过原中心的边界时，这个$i$就升级为新的中心。</p>
-<p>贴代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="comment">//#include&lt;&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">char</span> str[<span class="number">120000</span>],s[<span class="number">240000</span>];</div><div class="line"><span class="keyword">int</span> ans,F[<span class="number">240000</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">pre</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	s[<span class="number">0</span>]=<span class="string">'@'</span>;</div><div class="line">	<span class="keyword">int</span> l=<span class="built_in">strlen</span>(str);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;l;i++)</div><div class="line">	&#123;</div><div class="line">		s[i*<span class="number">2</span>+<span class="number">1</span>]=<span class="string">'#'</span>;</div><div class="line">		s[i*<span class="number">2</span>+<span class="number">2</span>]=str[i];</div><div class="line">	&#125;</div><div class="line">	s[(l<span class="number">-1</span>)*<span class="number">2</span>+<span class="number">3</span>]=<span class="string">'#'</span>;</div><div class="line">	s[(l<span class="number">-1</span>)*<span class="number">2</span>+<span class="number">4</span>]=<span class="string">'%'</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">manacher</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> n=(<span class="built_in">strlen</span>(str)<span class="number">-1</span>)*<span class="number">2</span>+<span class="number">4</span>;</div><div class="line">	F[<span class="number">0</span>]=F[<span class="number">1</span>]=ans=<span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> p=<span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</div><div class="line">	&#123;</div><div class="line">		F[i]=max( <span class="number">0</span>,min( F[<span class="number">2</span>*p-i],p+F[p]-i ) );</div><div class="line">		<span class="keyword">while</span>(s[i-F[i]]==s[i+F[i]]) F[i]++;</div><div class="line">		<span class="keyword">if</span>(i+F[i]&gt;p+F[p]) p=i;</div><div class="line">		ans=max(ans,F[i]);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;str)!=EOF)</div><div class="line">	&#123;</div><div class="line">		pre();</div><div class="line">		manacher();</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans<span class="number">-1</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>例题：<a href="https://vjudge.net/problem/HDU-3068" target="_blank" rel="external">HDU3068</a>（裸题）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"Hello The Brutal World"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -403,7 +382,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/字符串/" rel="tag"># 字符串</a>
+            <a href="/tags/其他/" rel="tag"># 其他</a>
           
         </div>
       
@@ -416,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/环套树/" rel="next" title="环套树">
-                <i class="fa fa-chevron-left"></i> 环套树
+              <a href="/GDOI2017/" rel="next" title="东莞四日游">
+                <i class="fa fa-chevron-left"></i> 东莞四日游
               </a>
             
           </div>
@@ -425,10 +404,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/POJ2455/" rel="prev" title="POJ2455">
-                POJ2455 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
