@@ -97,7 +97,7 @@
   <entry>
     <title><![CDATA[manacher]]></title>
     <url>%2Fmanacher%2F</url>
-    <content type="text"><![CDATA[求最长回文子串。 字面意思 这么求？？ 暴力： 枚举某个点为回文中心，向两边扩展。（在每个字符中间再插一个没出现过的字符以保证回文子串长度为偶数的情况） 时间复杂度：$O(N^2)$ 然而可以线性时间。 $F_i$表示以$i$点为中心时的回文子串半径最大：cabac以b为中心的回文串的半径$r$为2 根据回文串的性质：左右对称 我们可以得出在某一个回文串中，以它回文中心右边的某个点为回文中心的最长回文子串长度不小于以它左边对称点为中心的最长回文子串的长度 于是： 当$i&gt;P$且$i\le P+r$时（$P$为当前的中心） 有$Fi\ge F{P-r}​$ 在这基础上再向左右扩展 当然，还有一些特殊情况：出界，右边的回文串长一些（cccbcc中b为中心，最右边）等。。。 1F[i]=max( 0,min( F[2*p-i],p+F[p]-i ) ); 理解一下这条语句$2*p-i$原型是$p-(i-p)$ 在此基础上再向左右扩展下去 1while(s[i-F[i]]==s[i+F[i]]) F[i]++; 当以新的$i$点为中心的最长回文子串的边界超过原中心的边界时，这个$i$就升级为新的中心。 贴代码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;#include&lt;math.h&gt;#include&lt;string.h&gt;//#include&lt;&gt;using namespace std;char str[120000],s[240000];int ans,F[240000];void pre()&#123; s[0]='@'; int l=strlen(str); for(int i=0;i&lt;l;i++) &#123; s[i*2+1]='#'; s[i*2+2]=str[i]; &#125; s[(l-1)*2+3]='#'; s[(l-1)*2+4]='%';&#125;void manacher()&#123; int n=(strlen(str)-1)*2+4; F[0]=F[1]=ans=0; int p=1; for(int i=2;i&lt;=n;i++) &#123; F[i]=max( 0,min( F[2*p-i],p+F[p]-i ) ); while(s[i-F[i]]==s[i+F[i]]) F[i]++; if(i+F[i]&gt;p+F[p]) p=i; ans=max(ans,F[i]); &#125;&#125;int main()&#123; while(scanf("%s",&amp;str)!=EOF) &#123; pre(); manacher(); printf("%d\n",ans-1); &#125; return 0;&#125; 例题：HDU3068（裸题）]]></content>
+    <content type="text"><![CDATA[求最长回文子串。 字面意思 怎么求？？ 暴力： 枚举某个点为回文中心，向两边扩展。（在每个字符中间再插一个没出现过的字符以保证回文子串长度为偶数的情况） 时间复杂度：$O(N^2)$ 然而可以线性时间。 $F_i$表示以$i$点为中心时的回文子串半径最大：cabac以b为中心的回文串的半径$r$为2 根据回文串的性质：左右对称 我们可以得出在某一个回文串中，以它回文中心右边的某个点为回文中心的最长回文子串长度不小于以它左边对称点为中心的最长回文子串的长度 于是： 当$i&gt;P$且$i\le P+r$时（$P$为当前的中心） 有$Fi\ge F{P-r}$ 在这基础上再向左右扩展 当然，还有一些特殊情况：出界，右边的回文串长一些（cccbcc中b为中心，最右边）等。。。 1F[i]=max( 0,min( F[2*p-i],p+F[p]-i ) ); 理解一下这条语句$2*p-i$原型是$p-(i-p)$ 在此基础上再向左右扩展下去 1while(s[i-F[i]]==s[i+F[i]]) F[i]++; 当以新的$i$点为中心的最长回文子串的边界超过原中心的边界时，这个$i$就升级为新的中心。 贴代码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;#include&lt;math.h&gt;#include&lt;string.h&gt;//#include&lt;&gt;using namespace std;char str[120000],s[240000];int ans,F[240000];void pre()&#123; s[0]='@'; int l=strlen(str); for(int i=0;i&lt;l;i++) &#123; s[i*2+1]='#'; s[i*2+2]=str[i]; &#125; s[(l-1)*2+3]='#'; s[(l-1)*2+4]='%';&#125;void manacher()&#123; int n=(strlen(str)-1)*2+4; F[0]=F[1]=ans=0; int p=1; for(int i=2;i&lt;=n;i++) &#123; F[i]=max( 0,min( F[2*p-i],p+F[p]-i ) ); while(s[i-F[i]]==s[i+F[i]]) F[i]++; if(i+F[i]&gt;p+F[p]) p=i; ans=max(ans,F[i]); &#125;&#125;int main()&#123; while(scanf("%s",&amp;str)!=EOF) &#123; pre(); manacher(); printf("%d\n",ans-1); &#125; return 0;&#125; 例题：HDU3068（裸题）]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -173,8 +173,8 @@
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>树</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>

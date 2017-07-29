@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="求最长回文子串。 字面意思 这么求？？">
+<meta name="description" content="求最长回文子串。 字面意思 怎么求？？">
 <meta name="keywords" content="字符串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="manacher">
 <meta property="og:url" content="http://yoursite.com/manacher/index.html">
 <meta property="og:site_name" content="YKgsmUDq&#39;blog">
-<meta property="og:description" content="求最长回文子串。 字面意思 这么求？？">
+<meta property="og:description" content="求最长回文子串。 字面意思 怎么求？？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-29T12:38:11.260Z">
+<meta property="og:updated_time" content="2017-07-29T13:38:35.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="manacher">
-<meta name="twitter:description" content="求最长回文子串。 字面意思 这么求？？">
+<meta name="twitter:description" content="求最长回文子串。 字面意思 怎么求？？">
 
 
 
@@ -352,7 +352,7 @@
       
         <p>求最长回文子串。</p>
 <p>字面意思</p>
-<p>这么求？？</p>
+<p>怎么求？？</p>
 <a id="more"></a>
 <p>暴力：</p>
 <p>枚举某个点为回文中心，向两边扩展。（在每个字符中间再插一个没出现过的字符以保证回文子串长度为偶数的情况）</p>
@@ -363,7 +363,7 @@
 <p>我们可以得出在<strong>某一个回文串中</strong>，以它回文中心右边的某个点为回文中心的最长回文子串长度不小于以它左边对称点为中心的最长回文子串的长度</p>
 <p>于是：</p>
 <p>当$i&gt;P$且$i\le P+r$时（$P$为当前的中心）</p>
-<p>有$F<em>i\ge F</em>{P-r}​$</p>
+<p>有$F<em>i\ge F</em>{P-r}$</p>
 <p>在这基础上再向左右扩展</p>
 <p>当然，还有一些特殊情况：出界，右边的回文串长一些（cccbcc中b为中心，最右边）等。。。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">F[i]=max( <span class="number">0</span>,min( F[<span class="number">2</span>*p-i],p+F[p]-i ) );</div></pre></td></tr></table></figure>
