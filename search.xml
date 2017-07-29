@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[东莞四日游]]></title>
+    <url>%2FGDOI2017%2F</url>
+    <content type="text"><![CDATA[Day0​ 到东莞之后，入住了酒店就去学校吃饭，简易自助餐还行。。。 ​ 晚上看电视，浪。 Day1​ T1：字符串，用KMP似乎可做，但N久没打过KMP，现场推，虚啊。。。 ​ T2：题目又臭又长系列（还有五千字完整版），题意其实就一句话。。 ​ T3：又TM是字符串，送，果断送。。。 ​ T4：数论？DP？似乎可以推一推（为我这次爆炸埋下伏笔）。 ​ 随便打完T1，调了调过了样例就放一边不理了（我哪来的自信）。接着想去推一推T4，于是推完了整个早上。。。 ​ 下午听评讲：T1就是KMP，T2没高级算法瞎搞，T3后缀自动机，T4听不懂（我TM还想推一推）。 成绩：20+0+0+0=20，我准备退役吧 T1没对拍挂掉了。 有两个人样例没过80分，还有一个暴力90。。。 我拿什么去跟别人比。 Day2​ T1：宽搜啊！！！ ​ T2：hash？什么鬼。。 ​ T3：又是字符串，不过好像是DP。 ​ T4：题目又臭又长系列，要用到概率？弃。 ​ T1宽搜打了半天，T2我连读入都不会Orz，T3似乎可以贪心，不是吧。。。T4弃了。。 ​ 中午吃饭时发现自己的T3贪心是错的。跪了QAQ ​ 下午：T1就是宽搜，T2出题人在北京，估计是不敢来吧，正解居然是类似水分的方法，你用了正解的水分方法就能A。T3：n^2的DP，我又想了一种O(n)的方法，不知对不对。 成绩：75+5+0+0=80 T1挂掉了，不知什么原因，T3水了5分。D3旅游已成定局。 苍天饶过谁。 Day3​ 在酒店待了一天，没去旅游。 Day4​ 闭幕仪式，%罗指导进队。 胸牌滚粗。 这次彻底爆炸，赛前专攻的网络流、图论一题都没出，没看过的往年很少出的字符串倒是出了两题。 D1不应该搞T4，T4的正解完全不是我这种水平能做到的，去仔细想想T2也许能想到正解。 要吸取教训啊QAQ 你以为他不会考的他就一定会考 ——by 罗指导]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+      <tags>
+        <tag>GDOI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[最小树形图]]></title>
+    <url>%2F%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[裸题意：给你一个图，每条边有一个花费，指定一个点为根，要求选其中若干条边构成一棵合法的树，且花费最少，求最小花费。 与最小生成树的区别：最小生成树是要最大的边权最小，最小树形图是要边权和最小。 朱刘算法：最小树形图一般用朱刘算法。 朱刘算法是由两个中国人提出，一个姓朱，一个姓刘，所以叫朱刘算法。 ———————————我是分界线，下面正文———————————– 首先要认识到，这个最小花费一定不小于每个点的$k$的和（假设$k$是与这个点相连的边中花费最小的边的花费），所以直接选边权最小的边有可能就是最小树形图。 如图： 边上的黑色数字是花费，点上的红色数字就是$k$啦。 所以就先贪心先选好每个点的最小花费的边，然后把这条边的花费累加到$ans$。 但是这样有一个问题：可能有环。 如上图选完边之后的效果： 显然出现了两个环，没有构成一棵树，怎么办？ 有环就把环缩成点咯。 缩点之后就要把原来环里面的点的连向环外的点的边重新连回去。 不过由于环内每个点已经累加一次边值了，所以要把每个点连出去的边的花费都减$k$ 。 效果如图： （红边是选了的） 然后接着给每个点选边（全部点都重新选边），接着缩点，直到没有出现环时就是一棵树。 这棵树就是最小树形图。 例题：POJ3164（裸题）、HDU2121（题解戳这）]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2-sat]]></title>
+    <url>%2F2-SAT%2F</url>
+    <content type="text"><![CDATA[概念SAT的全称是Satisfiability。 Satisfiability，可满足性。 SAT问题就是要确定一个满足所有条件的方案或判断某方案是否合理。 举个栗子： 有$N$个国家，每个国家有$M$名代表，其中一些国家的一些代表有冲突。 现在这$N$个国家要召开会议，每个国家要派一名代表，且被派出的代表两两间没有冲突，求一个可行的方案。 这就是一个典型的SAT问题。 国家相当于条件，不同的代表相当于不同的情况。 上述的就是M-SAT问题，因为每个条件有M种情况。 同理，当每个条件都只有两种情况时，就是2-SAT问题。 为什么只研究2-SAT而不研究M更大的SAT问题呢？ 因为当$M\ge3$时，这是NP完全问题。 算法很简单，将有必选关系的点连边，然后枚举每个点跑一遍看有没有冲突就行了。 讲得太简单了？ 那我再详细点： 还是像上面的那个问题，但规定$M$为$2$（不是2就不是2-SAT问题）。 若$A$国的代表$A_1$与$B$国的代表$B_1$有冲突，不难发现，如果国派的是$A_1$，那国只能派$B_2$，所以就在$A_1B_2$间连一条有向边从$A_1$指向$B_2$，表示选$A_1$就必选$B_2$。同理，选$B_1$必选$A_2$，这就是必选关系。 连好边之后就枚举每个还没确定代表（情况）国家（条件），随便选一个代表（情况），然后沿必选关系往下走，如果发现有冲突（访问某个国家的另一个代表也是必选的），就退出，换另一个代表试。如果两个代表都不行， 那你可能要问了，为什么是换这个国家的代表，不换之前选过的？ 其实不难看出，这个图是对称的，所以换那个都无所谓（实在还不懂就自己建个图看一看，推一推）。 例题：UVaLive 3211（这里题解）]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>2-sat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[BZOJ2809]]></title>
+    <url>%2FBZOJ2809%2F</url>
+    <content type="text"><![CDATA[题目传送门 Description有$N$个忍者及一个Master，忍者从$1$~$N$编号，Master编号为0，忍者之间有从属关系，上级的编号一定比下属小。 每个忍者有一个工资和领导能力值。 现要求派出一些忍者并确定一名领导者，派出忍者要支付工资。领导者也可以被派出，但派出就付工资，不派出就不用，领导者必须是派出的所有忍者的上级（祖先）。 求：在预算范围内派出的忍者数*领导者的领导能力值。 Input第一行：$N$和$M$，$N$表示忍者数，$M$表示工资总预算。 接下来$N$行：每行三个整数，$B_i$、$C_i$、$L_i$，其中$B_i$表示上级，$C_i$表示工资，$L_i$表示领导能力值。 Output一行，一个数：答案。 Solution用主席树做。 建起来明显就是一棵树。 按DFS遍历一遍（前序遍历）并记录每个点进去和出来的时间。 以工资大小顺序为下标，累加总工资和人数。 再以这个时间为顺序把点一个一个加进去，更新他父亲那颗树。 然后枚举每个点，可以知道每个点的子孙的时间就在他进去和出去的时间的范围内。 出去时间时的线段树减去进去时间时的线段树就是它子孙的了。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;using namespace std;const int maxn=100100;int n,m;long long ans;struct Ninja&#123; int fa,cost,l;&#125;ninja[maxn];struct EDGE&#123; int ap; EDGE *next;&#125;edge[maxn],*ind[maxn];int el;void input(int x,int y)&#123; edge[++el].ap=y; edge[el].next=ind[x]; ind[x]=&amp;edge[el];&#125; struct idnk&#123; int num,adr;&#125;b[maxn];int c[maxn];bool cmp(idnk x,idnk y)&#123;return x.num&lt;y.num;&#125;void dis()&#123; sort(b+1,b+1+n,cmp); for(int i=1;i&lt;=n;i++) c[b[i].adr]=i;&#125; int T,din[maxn],dout[maxn],d[maxn];void dfs(int x)&#123; din[x]=++T; d[T]=x; for(EDGE *k=ind[x];k!=NULL;k=k-&gt;next) dfs(k-&gt;ap); dout[x]=T;&#125; struct TREE&#123; long long sumc; long long sumn; TREE *l,*r;&#125;tree[maxn*20],*root[maxn];int tl;TREE *build(int l,int r)&#123; int N=++tl; if(l==r) return &amp;tree[N]; int mid=(l+r)/2; tree[N].l=build(l,mid); tree[N].r=build(mid+1,r); return &amp;tree[N]; &#125; TREE *update(int l,int r,int find,int add,TREE *k)&#123; int N=++tl; if(l==r) &#123; tree[N].sumc=k-&gt;sumc+add; tree[N].sumn=1; return &amp;tree[N]; &#125; int mid=(l+r)/2; if(find&lt;=mid) tree[N].l=update(l,mid,find,add,k-&gt;l),tree[N].r=k-&gt;r; else tree[N].l=k-&gt;l,tree[N].r=update(mid+1,r,find,add,k-&gt;r); tree[N].sumc=tree[N].l-&gt;sumc+tree[N].r-&gt;sumc; tree[N].sumn=tree[N].l-&gt;sumn+tree[N].r-&gt;sumn; return &amp;tree[N];&#125; long long work(int l,int r,long long maxm,TREE *tl,TREE *tr)&#123; if(l==r) return tr-&gt;sumc-tl-&gt;sumc&lt;=maxm ? 1 : 0; int mid=(l+r)/2; if(tr-&gt;sumc-tl-&gt;sumc&lt;=maxm) return tr-&gt;sumn-tl-&gt;sumn; else if(tr-&gt;l-&gt;sumc-tl-&gt;l-&gt;sumc&gt;maxm) return work(l,mid,maxm,tl-&gt;l,tr-&gt;l); else return tr-&gt;l-&gt;sumn-tl-&gt;l-&gt;sumn+work(mid+1,r,maxm-tr-&gt;l-&gt;sumc+tl-&gt;l-&gt;sumc,tl-&gt;r,tr-&gt;r);&#125; int main()&#123; scanf("%d%d",&amp;n,&amp;m); for(int i=1;i&lt;=n;i++)&#123; scanf("%d%d%d",&amp;ninja[i].fa,&amp;ninja[i].cost,&amp;ninja[i].l); b[i].adr=i; b[i].num=ninja[i].cost; input(ninja[i].fa,i); &#125; dis(); for(EDGE *k=ind[0];k!=NULL;k=k-&gt;next) dfs(k-&gt;ap); root[0]=build(1,n); for(int i=1;i&lt;=n;i++) root[i]=update(1,n,c[d[i]],ninja[d[i]].cost,root[i-1]); for(int i=1;i&lt;=n;i++) &#123; long long sumn=work(1,n,m,root[din[i]-1],root[dout[i]]); ans=max(ans,sumn*ninja[i].l); &#125; printf("%lld",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>主席树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[BZOJ1040]]></title>
+    <url>%2FBZOJ1040%2F</url>
+    <content type="text"><![CDATA[题目传送门 Description$Z$国有$N$个骑士，每个骑士有一个战斗力和一个讨厌的骑士（不会讨厌自己）。 骑士按$1$至$N$编号。 现在要选出一些骑士组成一个骑士团，要求骑士团内的每个骑士所讨厌的骑士都不在骑士团内。求：满足条件的骑士团的最大战斗力和是多少？ Input第一行：一个数$N$，表示骑士数。 接下来$N$行：每行两个整数，分别表示当前骑士的战斗力和他讨厌的骑士的编号 Output一个整数：表示最大战斗力和。 Solution$A$讨厌$B$，则$AB$不能同时入选，等价于$B$讨厌$A$，所以应该是无向边。 $N$个点$N$条边，很明显就是环套树。同一条边上的点不能同时入选，求最大和，显然用树形DP。 深搜一遍，发现环就把环上的一个点拆掉，假设被拆掉的边的两个点分别为$u$和$v$，就在$u$和$v$上分别做树形DP，再比较两点不取时的最大和，比较得出答案。 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;stack&gt;#include&lt;queue&gt;using namespace std;const int maxn=1000100;int n,heat[maxn],zdl[maxn]; long long ans,sum;struct EDGE&#123; int u,v,num; EDGE *next;&#125;edge[maxn*2],*ind[maxn];int el=-1;void input(int u,int v)&#123; edge[++el].u=u; edge[el].v=v; edge[el].num=el; edge[el].next=ind[u]; ind[u]=&amp;edge[el];&#125;int visit[maxn],cuta,cutb,cute;void dfs(int u,int fa)&#123; visit[u]=1; for(EDGE *k=ind[u];k!=NULL;k=k-&gt;next) &#123; int v=k-&gt;v; if(v==fa) continue; if(visit[v]) &#123; cuta=u; cutb=v; cute=k-&gt;num; continue; &#125; dfs(v,u); &#125;&#125;long long int f[maxn],g[maxn];long long dp(int u,int fa)&#123; f[u]=zdl[u]; g[u]=0; for(EDGE *k=ind[u];k!=NULL;k=k-&gt;next) &#123; int v=k-&gt;v; if(v==fa||k-&gt;num==cute||(k-&gt;num^1)==cute) continue; f[u]+=dp(v,u); g[u]+=max(f[v],g[v]); &#125; return g[u];&#125;int main()&#123; scanf("%d",&amp;n); for(int i=1;i&lt;=n;i++) &#123; scanf("%d%d",&amp;zdl[i],&amp;heat[i]); input(heat[i],i); input(i,heat[i]); &#125; for(int i=1;i&lt;=n;i++) &#123; if(visit[i]==0) &#123; dfs(i,0); sum=max(dp(cutb,0),dp(cuta,0)); ans+=sum; &#125; &#125; printf("%lld",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>环套树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Dinic]]></title>
+    <url>%2Fdinic%2F</url>
+    <content type="text"><![CDATA[dinic 求最大流。 先引入两个概念：层次图、阻塞流。 ####层次图 根据每个点到源点的距离（到达源点最少要经过的边的数量），将点分层。 如图： 若level[s]=1,则各点上的数字就是该点的level。 一个bfs就行了。 不难发现，当层次图中不含有汇点时，就说明没有流可以流了。 阻塞流就是一条不考虑反向边的极大流，每次流完一条阻塞流就一定会去掉一条边。 然后dinic就是先bfs建个层次图，然后dfs一层一层传流量。 为什么要这样？ 原因时间少啊！！！ 首先，建层次图可以判断是否存在增广路。 其次，每次增广时间均不大于点数（层数最多就那么多）。 然后，dinic每次增广都可以将其中某一层连向下一层的边都流满，所以最多建$N$次层次图。 最后，dinic还可以进行当前弧优化，进一步压缩时间。 当前弧优化在一次DFS中，当某个点所有流出的边都满了，就不要再流这个点了。 例题：POJ1273（这里题解）]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>网络流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HDU2121]]></title>
+    <url>%2FHDU2121%2F</url>
+    <content type="text"><![CDATA[题目传送门 Description一个女王的国家由$N$个城市和$M$条单向路组成，城市从$0$到$N-1$编号，每条路若要美化都有一个花费。现在女王要你选一个点为国都，并选择$N-1$条路进行美化，使其能从国都沿美化了的路到达每一个城市，且总花费最少。 Input第一行：两个数字$N$、$M$ 。 接下来M行：每行三个数字$S$、$T$、$C$，分别表示这条路的起点编号、终点编号和美化花费。 Output一行：两个数字，分别表示最小总花费和国都编号。 Solution最小树形图，每个点选入边中边权最小的那个，缩点。 但是没有根怎么办？ 自己建一个根，并使根连向每个点，且花费为INF，这样可以保证只有一个点会连到你建的这个根，这个点就是实际的国都。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;string.h&gt;#include&lt;algorithm&gt;#include&lt;queue&gt;#include&lt;stack&gt;#define INF 0x3f3f3f3fusing namespace std;const int maxn=1010;const int maxm=10100;int n,m,root,ans1,ans2;bool asd;struct EDGE&#123; int u,v,cost,num,pointto; EDGE *next,*fenext;&#125;edge[maxm+maxn],*ind[maxn],*feind[maxn];int el=-1;void input(int u,int v,int cost)&#123; edge[++el].u=u; edge[el].pointto=v; edge[el].num=el; edge[el].v=v; edge[el].cost=cost; edge[el].next=ind[u]; ind[u]=&amp;edge[el]; edge[el].fenext=feind[v]; feind[v]=&amp;edge[el];&#125;bool vis[maxn],scc[maxn];int fa[maxn],mc[maxn],cedge[maxn];bool MST()&#123; memset(vis,0,sizeof(vis)); for(int i=0;i&lt;=el;i++) &#123; int u=edge[i].u,v=edge[i].v,c=edge[i].cost; if(!scc[u]&amp;&amp;!scc[v]) if(mc[v]&gt;=c) &#123; fa[v]=u,mc[v]=c;cedge[v]=edge[i].num; &#125; &#125; int sumr=0; for(int i=n-1;i&gt;=0;i--) &#123; if(fa[i]==root) &#123; if(sumr) return asd=0; else sumr++; &#125; if(!scc[i]&amp;&amp;fa[i]==-1) &#123; return asd=0; &#125; &#125; for(int i=n;i&gt;=0;i--) if(!scc[i]) &#123; memset(vis,0,sizeof(vis)); vis[root]=1; int v=i; for(;!vis[v];v=fa[v]) vis[v]=true; if(v==root) continue; int u=v; do &#123; scc[v]=1; v=fa[v]; &#125;while(u!=v); do &#123; ans1+=mc[v]; EDGE *k1; for(EDGE *k=ind[v];k!=NULL;k=k1) &#123; k1=k-&gt;next; if(scc[k-&gt;v]||k-&gt;u==u) continue; k-&gt;u=u; k-&gt;next=ind[u]; ind[u]=k; &#125; for(EDGE *k=feind[v];k!=NULL;k=k1) &#123; k1=k-&gt;fenext; if(scc[k-&gt;u]) continue; k-&gt;cost-=mc[v]; if(k-&gt;v==u) continue; k-&gt;v=u; k-&gt;fenext=feind[u]; feind[u]=k; &#125; if(v!=u) &#123; ind[v]=NULL; feind[v]=NULL; &#125; mc[v]=0; v=fa[v]; &#125;while(u!=v); scc[u]=0; mc[u]=INF+1; fa[u]=-1; return 1; &#125; for(int i=n-1;i&gt;=0;i--) if(!scc[i]) ans1+=mc[i]; return 0;&#125;void init();int main()&#123; while(scanf("%d%d",&amp;n,&amp;m)==2) &#123; init(); for(int i=n-1;i&gt;=0;i--) input(root,i,INF); for(int i=1;i&lt;=m;i++) &#123; int x,y,c; scanf("%d%d%d",&amp;x,&amp;y,&amp;c); input(x,y,c); &#125; if(n==0) printf("-1 0\n\n"); else if(n==1) printf("0 0\n\n"); else &#123; while(MST()); if(asd) for(int i=0;i&lt;n;i++) if(!scc[i]&amp;&amp;fa[i]==root) ans2=edge[cedge[i]].pointto; if(!asd) printf("impossible\n\n"); else printf("%d %d\n\n",ans1-int(INF),ans2); &#125; &#125; return 0;&#125;void init()&#123; root=n; asd=1; ans1=0;ans2=0; el=-1; for(int i=0;i&lt;=n;i++) ind[i]=NULL,feind[i]=NULL,mc[i]=INF+1; memset(scc,0,sizeof(scc)); memset(fa,n+1,sizeof(fa));&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>最小树形图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[POJ2455 Secret Milking Machine]]></title>
+    <url>%2FPOJ2455%2F</url>
+    <content type="text"><![CDATA[题目传送门 Description有$n$个点，$m$条边。每条边有个长度。 FJ要从点$v_1$走到点$v_n$走$k$次，每条边只能走一次。（他有一条用于从点$v_1$到点$v_n$的秘密通道） 问最长那条路最短可以是多长？ Input第一行：三个整数$n$、$m$和$k$，表示点数、边数和走几次。 接下来$m$行：每行有三个整数$u$、$v$、$l$表示点$u$到点$v$有条长度为$l$的边。 Output一个整数：最长那条图最短的长度。 Solution求最长的最短，二分啊。 每条边只走一次所以流量为一。 每次二分出一个答案$mid$。 跑网络流，只跑长度不大于$mid$的边。 看总流量是否为$k$。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;string.h&gt;#include&lt;algorithm&gt;#define oo 100000using namespace std;const int maxn=210;const int maxp=500100;int N,P,T;struct EDGE&#123; int ap,L,flow; EDGE *next,*fe;&#125;edge[maxp],*ind[maxn];int el=-1;void input(int u,int v,int l,int flow)&#123; edge[++el].ap=v; edge[el].flow=flow; edge[el].L=l; edge[el].next=ind[u]; ind[u]=&amp;edge[el]; edge[el].fe=&amp;edge[el^1];&#125;int level[maxn],q[maxn],Time=0;bool bfs(int x)&#123; int h1=1,t1=2; q[1]=1; level[1]=++Time; while(h1&lt;t1) &#123; int u=q[h1]; for(EDGE *k=ind[u];k!=NULL;k=k-&gt;next) &#123; int v=k-&gt;ap; if(k-&gt;L&gt;x||k-&gt;flow==0||level[v]&gt;=level[1]) continue; level[v]=level[u]+1; Time=max(Time,level[v]); if(v==N) return 1; q[t1++]=v; &#125; h1++; &#125; return 0;&#125;int dfs(int u,int flow,int x)&#123; if(u==N) return flow; int sum=0; for(EDGE *k=ind[u];k!=NULL;k=k-&gt;next) &#123; int v=k-&gt;ap; if(k-&gt;L&gt;x||k-&gt;flow==0||level[v]&lt;=level[u]) continue; int d=dfs(v,min(flow-sum,k-&gt;flow),x); sum+=d; k-&gt;flow-=d; k-&gt;fe-&gt;flow+=d; if(flow&lt;=sum) break; &#125; level[u]=0; return sum;&#125;bool check_dinic(int x)&#123; int sum=0; while(bfs(x)) sum+=dfs(1,oo,x); return T&lt;=sum ? 1 : 0;&#125;void init()&#123; for(int i=0;i&lt;=el;i++) edge[i].flow=1;&#125;int main()&#123; int l=oo,r=0; scanf("%d%d%d",&amp;N,&amp;P,&amp;T); for(int i=1;i&lt;=P;i++) &#123; int x,y,z; scanf("%d%d%d",&amp;x,&amp;y,&amp;z); r=max(r,z); l=min(l,z); input(x,y,z,1); input(y,x,z,1); &#125; while(l&lt;r-1) &#123; init(); int mid=(l+r)&gt;&gt;1; if(check_dinic(mid)) r=mid; else l=mid; &#125; printf("%d",r); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>最大流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[manacher]]></title>
+    <url>%2Fmanacher%2F</url>
+    <content type="text"><![CDATA[求最长回文子串。 字面意思 这么求？？ 暴力： 枚举某个点为回文中心，向两边扩展。（在每个字符中间再插一个没出现过的字符以保证回文子串长度为偶数的情况） 时间复杂度：$O(N^2)$ 然而可以线性时间。 $F_i$表示以$i$点为中心时的回文子串半径最大：cabac以b为中心的回文串的半径$r$为2 根据回文串的性质：左右对称 我们可以得出在某一个回文串中，以它回文中心右边的某个点为回文中心的最长回文子串长度不小于以它左边对称点为中心的最长回文子串的长度 于是： 当$i&gt;P$且$i\le P+r$时（$P$为当前的中心） 有$Fi\ge F{P-r}​$ 在这基础上再向左右扩展 当然，还有一些特殊情况：出界，右边的回文串长一些（cccbcc中b为中心，最右边）等。。。 1F[i]=max( 0,min( F[2*p-i],p+F[p]-i ) ); 理解一下这条语句$2*p-i$原型是$p-(i-p)$ 在此基础上再向左右扩展下去 1while(s[i-F[i]]==s[i+F[i]]) F[i]++; 当以新的$i$点为中心的最长回文子串的边界超过原中心的边界时，这个$i$就升级为新的中心。 裸题：HDU3068 贴代码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;#include&lt;math.h&gt;#include&lt;string.h&gt;//#include&lt;&gt;using namespace std;char str[120000],s[240000];int ans,F[240000];void pre()&#123; s[0]='@'; int l=strlen(str); for(int i=0;i&lt;l;i++) &#123; s[i*2+1]='#'; s[i*2+2]=str[i]; &#125; s[(l-1)*2+3]='#'; s[(l-1)*2+4]='%';&#125;void manacher()&#123; int n=(strlen(str)-1)*2+4; F[0]=F[1]=ans=0; int p=1; for(int i=2;i&lt;=n;i++) &#123; F[i]=max( 0,min( F[2*p-i],p+F[p]-i ) ); while(s[i-F[i]]==s[i+F[i]]) F[i]++; if(i+F[i]&gt;p+F[p]) p=i; ans=max(ans,F[i]); &#125;&#125;int main()&#123; while(scanf("%s",&amp;str)!=EOF) &#123; pre(); manacher(); printf("%d\n",ans-1); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[环套树]]></title>
+    <url>%2F%E7%8E%AF%E5%A5%97%E6%A0%91%2F</url>
+    <content type="text"><![CDATA[环套树：顾名思义，一棵树的基础上加一条边使其一部分变成一个环，也就是说点数和个边数一样。 有时候给出的图并不连通，这时就变成了环套树森林，也就是有多颗环套树。 如图： 一般来说，环套树会跟其他算法结合，比如树形DP。 环套树的处理方法一般就是把环上的某条边拆掉，然后分别在这条边上的两个点上各做一次树形DP。 注意：环套树只是指某一类题目，并没有明确的算法，对于环的处理方式也会有所不同。 例题：BZOJ1040（题解戳着）]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>环套树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[UVALive3211]]></title>
+    <url>%2FUVaLive3211%2F</url>
+    <content type="text"><![CDATA[题目传送门 Description有$N$架飞机，每架飞机有两个时间可以降落，一早一晚。 现在给出每架飞机可以降落的两个时间，问所有相邻时间降落的飞机中的最小时间间隔最大是多少。 多组测试数据。 Input每组测试数据： 第一行：一个整数$N$表示飞机数。 接下来$N$行：每行两个整数$e$、$l$表示早的时间和晚的时间（别问我为什么时间长这样）。 Output几个数据就几行：每行一个整数，最小时间间隔的最大。 Solution最小求最大，二分。 所有二分一个时间$T$，然后2-SAT连边：若$A$飞机早的那个时间$A_1$与$B$飞机早的那个时间$B_1$的间隔小于$T$，就把$A_1$与$B_2$连边从$A_1$指向$B_2$，同理也要连$B_1\rightarrow A_2$。 Code12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697#include&lt;iostream&gt;#include&lt;string.h&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;#include&lt;cmath&gt;#define INF 1000000000//#include&lt;&gt;using namespace std;struct Fl&#123; int x1,x2; &#125;F[2100];int n,R,L;struct EDGE&#123; int ap; EDGE *next;&#125;edge[21000000],*ind[2100*2];int el;int S[2100*2],sl;bool chose[2100*2];void add_edge(int x,int y)&#123; edge[++el].ap=y; edge[el].next=ind[x]; ind[x]=&amp;edge[el];&#125;void init()&#123; for(int i=0;i&lt;=4100;i++) ind[i]=NULL,S[i]=0,chose[i]=0; el=sl=0;&#125;void build(int x)&#123; for(int i=0;i&lt;n;i++)&#123; for(int j=i+1;j&lt;n;j++)&#123; if(abs(F[i].x1-F[j].x1)&lt;x) add_edge(i*2,j*2+1),add_edge(j*2,i*2+1); if(abs(F[i].x1-F[j].x2)&lt;x) add_edge(i*2,j*2),add_edge(j*2+1,i*2+1); if(abs(F[i].x2-F[j].x1)&lt;x) add_edge(i*2+1,j*2+1),add_edge(j*2,i*2); if(abs(F[i].x2-F[j].x2)&lt;x) add_edge(i*2+1,j*2),add_edge(j*2+1,i*2); &#125; &#125;&#125;bool dfs(int x)&#123; bool asd=1; if(chose[x^1]) return 0; if(chose[x]) return 1; chose[x]=1; S[++sl]=x; for(EDGE *k=ind[x];k!=NULL;k=k-&gt;next)&#123; if(!dfs(k-&gt;ap)) asd=0; if(asd==0) &#123; return 0; &#125; &#125; return 1;&#125;bool check(int N)&#123; init(); build(N); for(int i=0;i&lt;n;i++) &#123; if(!chose[i*2+1]&amp;&amp;!chose[i*2]) &#123; sl=0; if(!dfs(i*2+1))&#123; while(sl) chose[S[sl--]]=0; if(!dfs(i*2)) return 0; &#125; &#125; &#125; return 1;&#125;int main()&#123; while(scanf("%d",&amp;n)==1) &#123; L=1,R=0; for(int i=0;i&lt;n;i++) &#123; scanf("%d%d",&amp;F[i].x1,&amp;F[i].x2); R=max(L,max(F[i].x1,F[i].x2)); &#125; R++; while(L&lt;R-1) &#123; int mid=(L+R)/2; if(!check(mid)) R=mid; else L=mid; &#125; printf("%d\n",L); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>2-sat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[POJ1273 Drainage Ditches]]></title>
+    <url>%2FPOJ1273%2F</url>
+    <content type="text"><![CDATA[题目传送门 Description一次下雨淹了Bessie的田，所以FJ建了个排水系统帮Bessie排水到。 整个排水系统由$N$个点，$M$条排水管道组成。 除起点和终点每个点每的排水量和入水量要一致，时刻每条管道有一个单位时间最大排水量$f$。 Bessie的田就是起点$v_1$，终点是一条小溪点$v_n$。 求单位时间整个排水系统单位时间最大排水量。 Input第一行：两个整数，$M$和$N$，意义如题。 接下来$M$行：每行三个整数，$S$、$E$和$C$，表示点$S$和点$E$之间有条容量为$C$的排水管道。 Output一行：一个整数，最大排水量。 Solution网络流裸题 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;algorithm&gt;#define oo 1000000000//#include&lt;using namespace std;int m,n,ans;// instruct Edge&#123; int ap,v; Edge *next,*fe;&#125;edge[510],*ind[210];int l=0;void input(int f,int t,int c)&#123; edge[++l].ap=t; edge[l].v=c; edge[l].next=ind[f]; ind[f]=&amp;edge[l]; edge[++l].ap=f; edge[l].v=0; edge[l].next=ind[t]; ind[t]=&amp;edge[l]; edge[l].fe=&amp;edge[l-1]; edge[l-1].fe=&amp;edge[l];&#125;//int q[210],level[210]; //bfs构层次图bool bfs()&#123; memset(q,0,sizeof(q)); memset(level,0,sizeof(level)); int h=1,t=2; q[h]=1; level[1]=1; while(h&lt;t) &#123; Edge *k=ind[q[h]]; for(;k!=NULL;k=k-&gt;next) &#123; if(k-&gt;v==0||level[k-&gt;ap]!=0) continue; q[t++]=k-&gt;ap; level[k-&gt;ap]=level[ q[h] ]+1; &#125; h++; &#125; return level[m]!=0 ? 1:0;&#125;int dfs(int x,int maxin) //找增广路&#123; if(x==m) return maxin; int sum=0; Edge *i=ind[x]; for(;i!=NULL;i=i-&gt;next) &#123; if(maxin==sum) break; if(level[i-&gt;ap]&lt;=level[x]||!i-&gt;v) continue; int k=dfs(i-&gt;ap,min(maxin-sum,i-&gt;v)); i-&gt;v-=k; i-&gt;fe-&gt;v+=k; sum+=k; &#125; if(sum!=maxin) level[u]=0; //当前弧优化 return sum;&#125;//int main()&#123; scanf("%d%d",&amp;n,&amp;m); int l=1; for(int i=1;i&lt;=n;i++) &#123; int f,t,c; scanf("%d%d%d",&amp;f,&amp;t,&amp;c); input(f,t,c); &#125; while(bfs()) ans+=dfs(1,oo); printf("%d",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>最大流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[UVaLive3523 Knights of the Round Table]]></title>
+    <url>%2FUVaLive3523%2F</url>
+    <content type="text"><![CDATA[题目传送门 Description有$n(n\le 1000)$个骑士，$m(m\le1000000)$对骑士互相憎恨，要3个以上的骑士且保证互相憎恨的骑士不会坐在相邻位置才能开会议，求多少骑士一定不能参加任何一次会议。 多组测试数据。 Input每组测试数据： 第一行：两个整数，$n$、$m$意义如题。 接下来$m$行：每行两个整数$k_1$和$k_2$，表示这两个骑士互相憎恨。 当$n$和$m$为0时文件输入结束。 Output一个整数，一定不能参加的骑士的个数（原题样例有毒）。 Solution不互相憎恨的骑士间连一条边，能开会的骑士一定在同一个简单奇圈，简单奇圈一定在双连通分量上，只要这个双连通分量不是二分图就信了。 问题就转化成找不在不是二分图的双连通分量上的点的个数。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;vector&gt;#include&lt;string.h&gt;//#include&lt;&gt;using namespace std;struct EDGE&#123; int v; EDGE *next;&#125;edge[2100000],*ind[1100];struct S&#123; int u,v;&#125;s[2100000];int n,m,el=0,sl,sum;bool map[1100][1100],ans[1100];///vector&lt;int&gt; bcc[1100];int pre[1100],Time,bn,bccn[1100];///void input(int u,int v)&#123; edge[++el].v=v; edge[el].next=ind[u]; ind[u]=&amp;edge[el];&#125;int dfs(int u,int fa)&#123; int lowu=pre[u]=++Time,child=0; for(EDGE *k=ind[u];k!=NULL;k=k-&gt;next) &#123; int v=k-&gt;v; if(pre[v]==0) &#123; s[++sl].v=v,s[sl].u=u; child++; int lowv=dfs(v,u); lowu=min(lowv,lowu); if(lowv&gt;=pre[u]) &#123; bcc[++bn].clear(); while(1) &#123; int x=s[sl].u,y=s[sl].v; sl--; if(bccn[x]!=bn) &#123; bcc[bn].push_back(x); bccn[x]=bn; &#125; if(bccn[y]!=bn) &#123; bcc[bn].push_back(y); bccn[y]=bn; &#125; if(x==u&amp;&amp;y==v) break; &#125; &#125; &#125; else if(pre[v]&lt;pre[u] &amp;&amp; v!=fa) &#123; s[++sl].v=v,s[sl].u=u; lowu=min(lowu,pre[v]); &#125; &#125; return lowu;&#125;void find_bcc()&#123; for(int i=1;i&lt;=n;i++) &#123; if(!pre[i]) dfs(i,-1); &#125;&#125;int color[1100];bool color_che(int u,int c)&#123; for(EDGE *k=ind[u];k!=NULL;k=k-&gt;next) &#123; int v=k-&gt;v; if(bccn[v]!=c) continue; if(color[v]==color[u]) return 0; if(!color[v]) &#123; color[v]=3-color[u]; if(color_che(v,c)==0) return 0; &#125; &#125; return 1;&#125;void che()&#123; for(int i=1;i&lt;=bn;i++) &#123; memset(color,0,sizeof(color)); color[bcc[i][0]]=1; for(int j=0;j&lt;bcc[i].size();j++) bccn[bcc[i][j]]=i; if(!color_che(bcc[i][0],i)) for(int j=0;j&lt;bcc[i].size();j++) ans[bcc[i][j]]=1; &#125;&#125;void init()&#123; for(int i=0;i&lt;=n;i++)&#123; ind[i]=NULL; pre[i]=ans[i]=bccn[i]=0; &#125; bn=sl=Time=sum=el=0;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); init(); while(n!=0&amp;&amp;m!=0) &#123; for(int i=1;i&lt;=m;i++) &#123; int x,y; scanf("%d%d",&amp;x,&amp;y); map[x][y]=1; map[y][x]=1; &#125; for(int i=1;i&lt;n;i++) for(int j=i+1;j&lt;=n;j++) if(!map[i][j]) input(i,j),input(j,i); else map[i][j]=0; find_bcc(); che(); for(int i=1;i&lt;=n;i++) if(!ans[i]) sum++; printf("%d\n",sum); scanf("%d%d",&amp;n,&amp;m); init(); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>双连通分量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[双连通分量]]></title>
+    <url>%2F%E6%97%A0%E5%90%91%E5%9B%BE%E5%8F%8C%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F%2F</url>
+    <content type="text"><![CDATA[无向图的双连通分量跟有向图的连通分量有点像。 先说说一些定义。 时间戳：以某个点$v_i$为起点，dfs到的其他点$v_j$的时间。通常用pre表示 连通图：每两个点间都有路径存在的无向图就叫连通图。 割顶(cut vertex)：也叫割点。在某个连通图$G$中，若去掉某个点$i$，该图$G$无法保持所有点连通，那这个点就是割顶。 桥(bridge)：类似的，在某个连通图$G$中，若去掉某个边$e$，该图$G$无法保持所有点连通，那这个边就叫桥。 点-双连通：若一个无向图的点两两间都有两条不相交（经过的点不一样）的路径，那么我们就称这个无向图是点-双连通的。条件等价于任意两条边都在一个简单环内。 不难发现，若一个无向图是点-双连通图，那么就代表这个图内部无割顶（既然有两条不相交的路径，去掉任何一个点都还是可以连通的）。 边-双连通：类似的，若一个无向图的点两两间都有两条不重合（这个要求低一点，点可以重复，但边不行）的路径，那么我们就称这个无向图是边-双连通的。 在边-双连通图中，去掉任何一条边，这个图都还是连通的。 下面进入正题：​ 对于一张无向图，它的点-双连通的极大子图称为双连通分量(Biconnected Component,BCC)。 ​ 而边-双连通的极大子图称为边-双连通分量(edge-biconnected component)。 ​ 如上图：虽然{3,4,5}也是点-双连通的，但{3,4,5,6,7}才叫双连通分量，这就是极大子图的意义。另外一个双连通分量是{1,2,3}。还有，整个图{1,2,3,4,5,6,7,8}是边-双连通分量。 ​ 还如上图：对于整个图来说，3是割顶。不难发现作为割顶的点会同时存在于多个双连通分量里。而其他点只可能存在于一个双连通分量里。 ​ 找连通分量首先要会找割顶。 ​ 随便找一个点作为根，强行把无向图转换为一棵树。连回祖先的边我们叫它反向边（要与有向图的反向边区分开）。 ​ 不难发现：若某个点$v$的后代都没有反向边连回$v$的祖先，那么就可以得出$v$是割顶的结论。 ​ 用时间戳就可以知道祖孙关系。 ​ 若发现某个点的后代最多只能连回它自己，则说明这个点及它的后代就是一个双连通分量。 ​ 注意：用反向边更新时，不能用连回父亲的边，这条边没意义。 例题：UVaLive3523（这里题解）]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>双连通分量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[trie（字典树）]]></title>
+    <url>%2Ftrie%2F</url>
+    <content type="text"><![CDATA[$trie$（字典树），用一棵树保存多个字符串，如图： 这棵字典树就保存着$8$条字符串：{to,tea,ted,a,i,in,inn}。 从根节点到某特定节点的路径就是对应的字符串。如上图节点编号为红色的点就说明：从根节点到该节点的路径为一个保存了的字符串。 具体实现用$trie[i][j]$表示节点$i$走$j$字母到达的点的编号（根的编号为0），如上图： $trie[0][t]=1,trie[1][o]=2,trie[1][e]=3,trie[3][a]=4,…,trie[9][n]=10$。 字母一般用编号$0$到$m$代替。 然后用一个val数组保存以该点为结尾的字符串的个数，如上图：$val[0]=0,val[1]=0,val[2]=1,val[3]=0,…,val[10]=1$。 有时候可能会有多个相同字符串，所以$val$数组保存的数可能大于零。 建$trie$程序如下： 1234567891011121314151617181920212223242526void buildtrie(int x)&#123; int u=0,m=strlen(str[x]); for(int i=0;i&lt;m;i++) &#123; int v=T(str[x][i]); if(trie[u][v]==0) //开新节点 &#123; trie[u][v]=++se; val[se]=0; memset(trie[se],0,sizeof(trie[se])); &#125; u=trie[u][v]; //接着往下走 &#125; val[u]++;&#125;int main()&#123; scanf("%d",n); for(int i=0;i&lt;n;i++) &#123; scanf("%s",str[i]); buildtrie(i); &#125; return 0;&#125; 例题：UVALive3942（题解）]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>树</tag>
+        <tag>字符串</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[主席树]]></title>
+    <url>%2F%E4%B8%BB%E5%B8%AD%E6%A0%91%2F</url>
+    <content type="text"><![CDATA[主席树是可持久化线段树的一种实现。 可持久化线段树：保存历史记录的线段树。 来源：某大神考场上不会打某数据结构而发明的 Orz 如果更新某线段树要记录它的历史记录，最暴力的方法就是新开一棵线段树。 时间空间明显都很大。 我们发现：每次修改，线段树都只用修改某条路径上$log_2n$个点，如果新开线段树全都再搞一遍太不划算了。 那我们可以试着只修改要修改的那条路径。 以线段树经典用法求区间最大为例，如图： 将区间$[1,2,3,4]$中的$1$改为$5$ 要修改的点重开一个空间，不用修改的直接连回原来位置就好啦。 可持久化线段树拥有了很多普通线段树不具有的特殊性质，所以也有了很多妙用。 例题：BZOJ2809 (这里题解)]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>主席树</tag>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[最大权闭合子图]]></title>
+    <url>%2F%E6%9C%80%E5%A4%A7%E6%9D%83%E9%97%AD%E5%90%88%E5%AD%90%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[如何求最大权闭合子图？ 可用网络流最小割思想。 闭合子图：若一个有向图的子图里的点的所有出边都指回该子图里的点，那么这个子图就是闭合子图。 如图： 圈内的数字是点的编号，圈外的数字是点权。 闭合子图有：{5}、{2,5}、{2,4,5}、{1,2,4,5}、{1,2,3,4,5} 像{1,3}、{1,2}就不是啦。 最大权闭合子图其实就是一道题。 给出一个有向图的边和点权，点权有正有负，选了某个点那它的出边所指向的点也必须选。 求选出的点的点权和最大是多少。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>网络流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[最小费用最大流]]></title>
+    <url>%2F%E6%9C%80%E5%B0%8F%E8%B4%B9%E7%94%A8%E6%9C%80%E5%A4%A7%E6%B5%81%2F</url>
+    <content type="text"><![CDATA[裸题意：一个网络，每条边有容量，也有单位流量的费用。 此时最大流可能有多种，求费用最小的最大流费用。 下面给出最常用的一种方法： 以费用为边长，用SPFA沿还可以增广的边找出一条从源点到汇点的最短路，并记录路径和这条路上的最小流量$f_{min}$。若源汇点之间不连通就表示没有增广路了，当前费用就是最大流的最小费用。 然后增广这条路，这条路的每条边流量加$f{min}$，这条路的增广费用就是$f{min}*d$（$d$是最短路长度）。然后继续步骤$1$。 大致证明：用费用最短路找的增广路一定是当前同流量中费用最小的一条增广路。 若最短路长度为$d$，这条增广路流量为$f$，这条增广路费用就是$df$，此时其他增广路若要流$f$流量，费用一定大于$df$。 最后以这种贪心思想找出来的最大流一定是最小费用的。 只是时间。。。 引用某大神的一句话：“当一某道题的正解是用网络流，那这时网络流的时间复杂度就是$O(10^7)$，若不是网络流，那它的时间复杂度就是$O(10^9)$。” 一些费用流题目： UVa1658、codevs1227、洛谷1251]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>网络流</tag>
+      </tags>
+  </entry>
+</search>
