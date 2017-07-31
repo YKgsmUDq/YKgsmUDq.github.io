@@ -96,7 +96,7 @@
 <meta property="og:description" content="dinic 求最大流。 先引入两个概念：层次图、阻塞流。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://otc0j46od.bkt.clouddn.com/dinic.png">
-<meta property="og:updated_time" content="2017-07-29T12:30:06.865Z">
+<meta property="og:updated_time" content="2017-07-30T11:31:20.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dinic">
 <meta name="twitter:description" content="dinic 求最大流。 先引入两个概念：层次图、阻塞流。">
@@ -363,15 +363,15 @@
 <p>一个bfs就行了。</p>
 <p>不难发现，当层次图中不含有汇点时，就说明没有流可以流了。</p>
 <h4 id="阻塞流"><a href="#阻塞流" class="headerlink" title="阻塞流"></a>阻塞流</h4><p>就是一条不考虑反向边的极大流，每次流完一条阻塞流就一定会去掉一条边。</p>
-<p>然后dinic就是先bfs建个层次图，然后dfs一层一层传流量。</p>
-<p>为什么要这样？</p>
-<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>时间少啊！！！</p>
-<p>首先，建层次图可以判断是否存在增广路。</p>
-<p>其次，每次增广时间均不大于点数（层数最多就那么多）。</p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>先bfs建个层次图，然后dfs沿层次图一层一层传流量。</p>
+<p>但为什么要这样？</p>
+<p>因为</p>
+<h3 id="时间少啊！！！"><a href="#时间少啊！！！" class="headerlink" title="时间少啊！！！"></a>时间少啊！！！</h3><p>首先，建层次图可以判断是否存在增广路。</p>
+<p>其次，保证每次增广时间均不大于点数（层数最多就那么多）。</p>
 <p>然后，dinic每次增广都可以将其中某一层连向下一层的边都流满，所以最多建$N$次层次图。</p>
 <p>最后，dinic还可以进行当前弧优化，进一步压缩时间。</p>
-<h4 id="当前弧优化"><a href="#当前弧优化" class="headerlink" title="当前弧优化"></a>当前弧优化</h4><p>在一次DFS中，当某个点所有流出的边都满了，就不要再流这个点了。</p>
-<p>例题：<a href="http://poj.org/problem?id=1273" target="_blank" rel="external">POJ1273</a>（这里<a href="http://ykgsmudq.com/POJ1273/" target="_blank" rel="external">题解</a>）</p>
+<h4 id="当前弧优化"><a href="#当前弧优化" class="headerlink" title="当前弧优化"></a>当前弧优化</h4><p>在一次DFS中，当某个点所有流出的边都满了，就退出，不要再流这个点了。</p>
+<p>例题：<a href="http://poj.org/problem?id=1273" target="_blank" rel="external">POJ1273</a>（这里<a href="http://ykgsmudq.com/POJ1273" target="_blank" rel="external">题解</a>）</p>
 
       
     </div>
@@ -590,7 +590,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#阻塞流"><span class="nav-number">1.</span> <span class="nav-text">阻塞流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当前弧优化"><span class="nav-number">3.</span> <span class="nav-text">当前弧优化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#阻塞流"><span class="nav-number">1.</span> <span class="nav-text">阻塞流</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作"><span class="nav-number"></span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间少啊！！！"><span class="nav-number"></span> <span class="nav-text">时间少啊！！！</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#当前弧优化"><span class="nav-number">1.</span> <span class="nav-text">当前弧优化</span></a></li></ol></div>
             
 
           </div>

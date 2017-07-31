@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="YKgsmUDq&#39;blog">
 <meta property="og:description" content="求最长回文子串。 字面意思 怎么求？？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-29T13:38:35.719Z">
+<meta property="og:updated_time" content="2017-07-30T11:34:39.744Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="manacher">
 <meta name="twitter:description" content="求最长回文子串。 字面意思 怎么求？？">
@@ -360,12 +360,12 @@
 <p>然而可以线性时间。</p>
 <p>$F_i$表示以$i$点为中心时的回文子串半径最大：cabac以b为中心的回文串的半径$r$为2</p>
 <p>根据回文串的性质：左右对称</p>
-<p>我们可以得出在<strong>某一个回文串中</strong>，以它回文中心右边的某个点为回文中心的最长回文子串长度不小于以它左边对称点为中心的最长回文子串的长度</p>
+<p>我们可以得出在<strong>某一个回文串中</strong>，以它的回文中心右边的某个点为回文中心的最长回文子串长度，不小于以它左边对称点为中心的最长回文子串的长度</p>
 <p>于是：</p>
-<p>当$i&gt;P$且$i\le P+r$时（$P$为当前的中心）</p>
-<p>有$F<em>i\ge F</em>{P-r}$</p>
+<p>当$i&gt;P$且$i\le P+r$时（$P$为当前的中心），</p>
+<p>有$F<em>i\gee F</em>{P-r}$。</p>
 <p>在这基础上再向左右扩展</p>
-<p>当然，还有一些特殊情况：出界，右边的回文串长一些（cccbcc中b为中心，最右边）等。。。</p>
+<p>当然，还有一些特殊情况：出界，右边的回文串长一些（cccbcc中b为中心，最右边）等一些情况。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">F[i]=max( <span class="number">0</span>,min( F[<span class="number">2</span>*p-i],p+F[p]-i ) );</div></pre></td></tr></table></figure>
 <p>理解一下这条语句$2*p-i$原型是$p-(i-p)$</p>
 <p>在此基础上再向左右扩展下去</p>
@@ -426,8 +426,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/POJ2455/" rel="prev" title="POJ2455">
-                POJ2455 <i class="fa fa-chevron-right"></i>
+              <a href="/POJ2455/" rel="prev" title="POJ2455  Secret Milking Machine">
+                POJ2455  Secret Milking Machine <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

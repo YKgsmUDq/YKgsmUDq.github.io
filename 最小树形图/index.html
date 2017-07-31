@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://otc0j46od.bkt.clouddn.com/%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE%EF%BC%881%EF%BC%89.png">
 <meta property="og:image" content="http://otc0j46od.bkt.clouddn.com/%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE%EF%BC%882%EF%BC%89.png">
 <meta property="og:image" content="http://otc0j46od.bkt.clouddn.com/%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE%EF%BC%884%EF%BC%89.png">
-<meta property="og:updated_time" content="2017-07-29T12:24:38.510Z">
+<meta property="og:updated_time" content="2017-07-31T07:17:26.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最小树形图">
 <meta name="twitter:description" content="裸题意：给你一个图，每条边有一个花费，指定一个点为根，要求选其中若干条边构成一棵合法的树，且花费最少，求最小花费。">
@@ -374,7 +374,6 @@
 <p>不过由于环内每个点已经累加一次边值了，所以要把每个点连出去的边的花费都减$k$ 。</p>
 <p>效果如图：</p>
 <p><img src="http://otc0j46od.bkt.clouddn.com/%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE%EF%BC%884%EF%BC%89.png" alt="最小树形图（3）"></p>
-<p>（红边是选了的）</p>
 <p>然后接着给每个点选边（全部点都重新选边），接着缩点，直到没有出现环时就是一棵树。</p>
 <p>这棵树就是最小树形图。</p>
 <p>例题：<a href="http://poj.org/problem?id=3164" target="_blank" rel="external">POJ3164</a>（裸题）、<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2121" target="_blank" rel="external">HDU2121</a>（<a href="http://ykgsmudq.com/HDU2121/" target="_blank" rel="external">题解戳这</a>）</p>

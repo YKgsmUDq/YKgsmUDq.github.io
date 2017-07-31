@@ -96,7 +96,7 @@
 <meta property="og:description" content="主席树是可持久化线段树的一种实现。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://otc0j46od.bkt.clouddn.com/%E4%B8%BB%E5%B8%AD%E6%A0%91.png">
-<meta property="og:updated_time" content="2017-07-29T12:23:39.228Z">
+<meta property="og:updated_time" content="2017-07-31T07:03:06.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="主席树">
 <meta name="twitter:description" content="主席树是可持久化线段树的一种实现。">
@@ -355,16 +355,21 @@
         <p>主席树是可持久化线段树的一种实现。</p>
 <a id="more"></a>
 <p>可持久化线段树：保存历史记录的线段树。</p>
-<p>来源：某大神考场上不会打某数据结构而发明的 Orz</p>
+<p>主席树来源：某大神考场上不会打某数据结构而发明的 Orz</p>
 <p>如果更新某线段树要记录它的历史记录，最暴力的方法就是新开一棵线段树。</p>
 <p>时间空间明显都很大。</p>
-<p>我们发现：每次修改，线段树都只用修改某条路径上$log_2n$个点，如果新开线段树全都再搞一遍太不划算了。</p>
-<p>那我们可以试着只修改要修改的那条路径。</p>
+<p>不难发现，每次进行修改一个点时，线段树都只会修改某条路径上$log_2n$个点，如果新开线段树全都再复制一遍就太不划算了。</p>
+<p>那我们可以试着只给要修改的那条路径开新空间。</p>
 <p>以线段树经典用法求区间最大为例，如图：</p>
 <p>将区间$[1,2,3,4]$中的$1$改为$5$</p>
 <p><img src="http://otc0j46od.bkt.clouddn.com/%E4%B8%BB%E5%B8%AD%E6%A0%91.png" alt="主席树"></p>
-<p>要修改的点重开一个空间，不用修改的直接连回原来位置就好啦。</p>
-<p>可持久化线段树拥有了很多普通线段树不具有的特殊性质，所以也有了很多妙用。</p>
+<p>给要修改的点重开一个空间，不用修改的直接连回原来位置就好啦。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>不同时候的根节点的位置都不同，所以用一个$root$数组保存不同时间根节点的位置，$root[i]$表示修改第$i$个数后根节点的位置。</p>
+<p>从根节点往下搜的时候，当前节点肯定是要重新开空间的。</p>
+<p>对于当前节点不用修改的那个儿子，指针直接指回原来那个儿子的位置。对于需要修改的儿子，指针就要指向新开的空间的位置。</p>
+<p>更新函数代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function">TREE *<span class="title">update</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> f,TREE *k)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> N=++tl;           <span class="comment">//开新空间</span></div><div class="line">	<span class="keyword">if</span>(l==r)</div><div class="line">	&#123;</div><div class="line">		tree[N].sum=k-&gt;sum+<span class="number">1</span>;</div><div class="line">		<span class="keyword">return</span> &amp;tree[N];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> mid=(l+r)/<span class="number">2</span>;</div><div class="line">	<span class="keyword">if</span>(f&lt;=mid)</div><div class="line">	&#123;</div><div class="line">		tree[N].l=update(l,mid,f,k-&gt;l);   <span class="comment">//左儿子被修改</span></div><div class="line">		tree[N].r=k-&gt;r;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		tree[N].l=k-&gt;l;</div><div class="line">		tree[N].r=update(mid+<span class="number">1</span>,r,f,k-&gt;r);  <span class="comment">//右儿子被修改</span></div><div class="line">	&#125;</div><div class="line">	tree[N].sum=tree[N].l-&gt;sum+tree[N].r-&gt;sum;</div><div class="line">	<span class="keyword">return</span> &amp;tree[N];        <span class="comment">//返回当前节点位置，以便父亲节点操作</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>可持久化线段树拥有很多普通线段树不具有的特殊性质，所以也有了很多乱七八糟的用法。因此，可持久化线段树的题目都不会是裸体，都值得思考。</p>
 <p>例题：<a href="http://www.lydsy.com/JudgeOnline/problemset.php?search=2809" target="_blank" rel="external">BZOJ2809</a>  (这里<a href="http://ykgsmudq.com/BZOJ2809" target="_blank" rel="external">题解</a>)</p>
 
       
@@ -469,8 +474,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/me.png"
@@ -565,6 +579,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">2.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

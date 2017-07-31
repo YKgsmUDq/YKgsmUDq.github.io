@@ -87,19 +87,19 @@
 
 
 
-<meta name="description" content="无向图的双连通分量跟有向图的连通分量有点像。">
+<meta name="description" content="无向图的双连通分量跟有向图的连通分量很像。">
 <meta name="keywords" content="图论,双连通分量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="双连通分量">
 <meta property="og:url" content="http://yoursite.com/无向图双连通分量/index.html">
 <meta property="og:site_name" content="YKgsmUDq&#39;blog">
-<meta property="og:description" content="无向图的双连通分量跟有向图的连通分量有点像。">
+<meta property="og:description" content="无向图的双连通分量跟有向图的连通分量很像。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://otc0j46od.bkt.clouddn.com/%E5%8F%8C%E8%BF%9E%E9%80%9A.png">
-<meta property="og:updated_time" content="2017-07-29T12:26:50.093Z">
+<meta property="og:updated_time" content="2017-07-31T06:39:23.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="双连通分量">
-<meta name="twitter:description" content="无向图的双连通分量跟有向图的连通分量有点像。">
+<meta name="twitter:description" content="无向图的双连通分量跟有向图的连通分量很像。">
 <meta name="twitter:image" content="http://otc0j46od.bkt.clouddn.com/%E5%8F%8C%E8%BF%9E%E9%80%9A.png">
 
 
@@ -352,28 +352,41 @@
       
 
       
-        <p>无向图的双连通分量跟有向图的连通分量有点像。</p>
+        <p>无向图的双连通分量跟有向图的连通分量很像。</p>
 <a id="more"></a>
 <p>先说说一些定义。</p>
-<p>时间戳：以某个点$v_i$为起点，dfs到的其他点$v_j$的时间。通常用pre表示</p>
-<p>连通图：每两个点间都有路径存在的无向图就叫连通图。</p>
+<p>时间戳：以某个点为起点，dfs到的其他点的时间。通常用$pre[i]$表示</p>
+<p>连通图：任意两个点间都有路径存在的无向图就叫连通图。</p>
 <p>割顶(cut vertex)：也叫割点。在某个连通图$G$中，若去掉某个点$i$，该图$G$无法保持所有点连通，那这个点就是割顶。</p>
 <p>桥(bridge)：类似的，在某个连通图$G$中，若去掉某个边$e$，该图$G$无法保持所有点连通，那这个边就叫桥。</p>
-<h3 id="点-双连通："><a href="#点-双连通：" class="headerlink" title="点-双连通："></a><strong>点-双连通</strong>：</h3><p>若一个无向图的点两两间都有两条不相交（经过的点不一样）的路径，那么我们就称这个无向图是点-双连通的。条件等价于任意两条边都在一个简单环内。</p>
+<p> <strong>点-双连通</strong>：</p>
+<p>若一个无向图的点两两间都有两条不相交（经过的点不一样）的路径，那么我们就称这个无向图是点-双连通的。条件等价于任意两条边都在一个简单环内。</p>
 <p>不难发现，若一个无向图是点-双连通图，那么就代表这个图内部无割顶（既然有两条不相交的路径，去掉任何一个点都还是可以连通的）。</p>
-<h4 id="边-双连通："><a href="#边-双连通：" class="headerlink" title="边-双连通："></a><strong>边-双连通：</strong></h4><p>类似的，若一个无向图的点两两间都有两条不重合（这个要求低一点，点可以重复，但边不行）的路径，那么我们就称这个无向图是边-双连通的。</p>
+<p>边-双连通：</p>
+<p>类似的，若一个无向图的点两两间都有两条不重合（这个要求低一点，点可以重复，但边不行）的路径，那么我们就称这个无向图是边-双连通的。</p>
 <p>在边-双连通图中，去掉任何一条边，这个图都还是连通的。</p>
-<h2 id="下面进入正题："><a href="#下面进入正题：" class="headerlink" title="下面进入正题："></a>下面进入正题：</h2><p>​    对于一张无向图，它的点-双连通的<strong>极大</strong>子图称为双连通分量(Biconnected Component,BCC)。</p>
-<p>​    而边-双连通的极大子图称为边-双连通分量(edge-biconnected component)。</p>
+<h2 id="下面进入正题："><a href="#下面进入正题：" class="headerlink" title="下面进入正题："></a>下面进入正题：</h2><p>对于一张无向图，它的点-双连通的<strong>极大</strong>子图称为双连通分量(Biconnected Component,BCC)。</p>
+<p>而边-双连通的极大子图称为边-双连通分量(edge-biconnected component)。</p>
 <p><img src="http://otc0j46od.bkt.clouddn.com/%E5%8F%8C%E8%BF%9E%E9%80%9A.png" alt="双连通"></p>
-<p>​    如上图：虽然{3,4,5}也是点-双连通的，但{3,4,5,6,7}才叫双连通分量，这就是极大子图的意义。另外一个双连通分量是{1,2,3}。还有，整个图{1,2,3,4,5,6,7,8}是边-双连通分量。</p>
-<p>​    还如上图：对于整个图来说，3是割顶。不难发现作为割顶的点会同时存在于多个双连通分量里。而其他点只可能存在于一个双连通分量里。</p>
-<p>​    找连通分量首先要会找割顶。</p>
-<p>​    随便找一个点作为根，强行把无向图转换为一棵树。连回祖先的边我们叫它反向边（要与有向图的反向边区分开）。</p>
-<p>​    不难发现：若某个点$v$的后代都没有反向边连回$v$的祖先，那么就可以得出$v$是割顶的结论。</p>
-<p>​    用时间戳就可以知道祖孙关系。</p>
-<p>​    若发现某个点的后代最多只能连回它自己，则说明这个点及它的后代就是一个双连通分量。</p>
-<p>​    <strong>注意：</strong>用反向边更新时，不能用连回父亲的边，这条边没意义。</p>
+<p>如上图：虽然{3,4,5}也是点-双连通的，但{3,4,5,6,7}才叫双连通分量，这就是极大子图的意义。另外一个双连通分量是{1,2,3}。还有，整个图{1,2,3,4,5,6,7,8}是边-双连通分量。</p>
+<p>因为点-双连通分量比边-双连通分量更常见更难一些，所以接下来我们只讨论点-双连通分量，至于边-双连通分量就交给各位自己思考了。</p>
+<p>还如上图：对于整个图来说，3是割顶。不难发现作为割顶的点会同时存在于多个双连通分量里。而其他点只可能存在于一个双连通分量里。</p>
+<p>也正因为割顶会同时属于多个双连通分量，所以对于双连通分量来说，割顶无意义。</p>
+<p>找双连通分量首先要会找割顶。</p>
+<h3 id="找割顶"><a href="#找割顶" class="headerlink" title="找割顶"></a>找割顶</h3><p>我们先随便找一个点作为根，强行把无向图转换为一棵树。连回父辈的边我们叫它反向边。</p>
+<p>不难发现：若某个点$v$的后代都没有反向边连回$v$的父辈，而是最多只连回$v$，那么就可以得出$v$是割顶的结论。因为这样一来，去掉点$v$后，就会多了由点$v$的后代组成的连通分量。</p>
+<p>用一个数组保存当前点</p>
+<p>用时间戳$pre_i$就可以知道祖孙关系。</p>
+<p>再开一个数组$low$。</p>
+<p>$low_i$表示点$i$的子孙以及他自己所能访问到的点的$pre_i$的最小值。</p>
+<p><strong>注意：</strong>用反向边更新$low$数组时，不能用连回父亲的边，这条边没意义。</p>
+<p>再用$pre_i$与$low_i$比较，就能知道点$i$是不是割顶。</p>
+<h3 id="标记双连通分量"><a href="#标记双连通分量" class="headerlink" title="标记双连通分量"></a>标记双连通分量</h3><p>当我们发现一个割顶点$u$时，说明我们找到了一个双连通分量。并且这个双连通分量由我们刚才访问完点$u$后遍历到的点组成。</p>
+<p>考虑到需要知道的是最后访问的几个点，而且割顶会同时属于多个双连通分量，记录走过的点不太好，所以我们用一个栈记录走过的边。</p>
+<p>当我们发现某个点是割顶时，就把栈里面的边拿出来，再把边上未染色的或者是颜色不同的点染色（赋值为$bccN$，表示这个点是属于编号为$bccN$的双连通分量的。若一个点之前就被被染过其他色，说明这个点是割顶）。</p>
+<p>并用一个$vector$的二维数组保存这些点，表示编号为$bccN$的双连通分量里有这个点。</p>
+<p>然后我们就可以找出所有双连通分量。</p>
+<p>具体细节还得看代码。</p>
 <p>例题：<a href="https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=1524" target="_blank" rel="external">UVaLive3523</a>（这里<a href="http://ykgsmudq.com/UVaLive3523/" target="_blank" rel="external">题解</a>）</p>
 
       
@@ -429,8 +442,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/UVaLive3523/" rel="prev" title="UVaLive3523">
-                UVaLive3523 <i class="fa fa-chevron-right"></i>
+              <a href="/UVaLive3523/" rel="prev" title="UVaLive3523 Knights of the Round Table">
+                UVaLive3523 Knights of the Round Table <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -593,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#点-双连通："><span class="nav-number">1.</span> <span class="nav-text">点-双连通：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#边-双连通："><span class="nav-number">1.1.</span> <span class="nav-text">边-双连通：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面进入正题："><span class="nav-number"></span> <span class="nav-text">下面进入正题：</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下面进入正题："><span class="nav-number">1.</span> <span class="nav-text">下面进入正题：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#找割顶"><span class="nav-number">1.1.</span> <span class="nav-text">找割顶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记双连通分量"><span class="nav-number">1.2.</span> <span class="nav-text">标记双连通分量</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="YKgsmUDq&#39;blog">
 <meta property="og:description" content="裸题意：一个网络，每条边有容量，也有单位流量的费用。 此时最大流可能有多种，求费用最小的最大流费用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-29T08:57:27.728Z">
+<meta property="og:updated_time" content="2017-07-31T07:15:49.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最小费用最大流">
 <meta name="twitter:description" content="裸题意：一个网络，每条边有容量，也有单位流量的费用。 此时最大流可能有多种，求费用最小的最大流费用。">
@@ -353,15 +353,15 @@
         <h3 id="裸题意："><a href="#裸题意：" class="headerlink" title="裸题意："></a>裸题意：</h3><p>一个网络，每条边有容量，也有单位流量的费用。</p>
 <p>此时最大流可能有多种，求费用最小的最大流费用。</p>
 <a id="more"></a>
-<h3 id="下面给出最常用的一种方法："><a href="#下面给出最常用的一种方法：" class="headerlink" title="下面给出最常用的一种方法："></a>下面给出最常用的一种方法：</h3><ol>
-<li>以费用为边长，用SPFA沿还可以增广的边找出一条从源点到汇点的最短路，并记录路径和这条路上的最小流量$f_{min}$。若源汇点之间不连通就表示没有增广路了，当前费用就是最大流的最小费用。</li>
-<li>然后增广这条路，这条路的每条边流量加$f<em>{min}$，这条路的增广费用就是$f</em>{min}*d$（$d$是最短路长度）。然后继续步骤$1$。</li>
+<h3 id="下面给出一种常用的方法："><a href="#下面给出一种常用的方法：" class="headerlink" title="下面给出一种常用的方法："></a>下面给出一种常用的方法：</h3><ol>
+<li>以费用为长度，用SPFA沿还有流量的弧找出一条从源点到汇点的最短路，并记录路径和这条路上剩余流量最少的边的流量$f_{min}$（若源汇点之间不连通就表示没有增广路了，当前费用就是最大流的最小费用）。</li>
+<li>增广这条最短路，这条路的每条边流量加$f<em>{min}$，这的次增广的费用就是$f</em>{min}*d$（$d$是最短路长度）。然后继续步骤$1$。</li>
 </ol>
 <h3 id="大致证明："><a href="#大致证明：" class="headerlink" title="大致证明："></a>大致证明：</h3><p>用费用最短路找的增广路一定是当前同流量中费用最小的一条增广路。</p>
-<p>若最短路长度为$d$，这条增广路流量为$f$，这条增广路费用就是$d<em>f$，此时其他增广路若要流$f$流量，费用一定大于$d</em>f$。</p>
-<p>最后以这种贪心思想找出来的最大流一定是最小费用的。</p>
-<p>只是时间。。。</p>
-<p>引用某大神的一句话：“当一某道题的正解是用网络流，那这时网络流的时间复杂度就是$O(10^7)$，若不是网络流，那它的时间复杂度就是$O(10^9)$。”</p>
+<p>假设此时最短路长度为$d$，这条增广路流量为$f$，这条增广路费用就是$d<em>f$，若有其他增广路要流过$f$流量，费用一定会大于$d</em>f$。</p>
+<p>或者说：用最短路找出来的增广路增广的成本肯定是是最低的。</p>
+<p>因为每一次增广后的图都是当前用最小费用增广出来的，所以最后以这种贪心思想找出来的最大流一定是最小费用的。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>曾经有大神说过：“当一某道题的正解是用网络流，那这时网络流的时间复杂度就是$O(10^7)$，若不是网络流，那它的时间复杂度就是$O(10^9)$。”</p>
 <p>一些费用流题目：</p>
 <p><a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=4533" target="_blank" rel="external">UVa1658</a>、<a href="http://codevs.cn/problem/1227/" target="_blank" rel="external">codevs1227</a>、<a href="https://www.luogu.org/problem/show?pid=1251" target="_blank" rel="external">洛谷1251</a></p>
 
@@ -582,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#裸题意："><span class="nav-number">1.</span> <span class="nav-text">裸题意：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下面给出最常用的一种方法："><span class="nav-number">2.</span> <span class="nav-text">下面给出最常用的一种方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大致证明："><span class="nav-number">3.</span> <span class="nav-text">大致证明：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#裸题意："><span class="nav-number">1.</span> <span class="nav-text">裸题意：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下面给出一种常用的方法："><span class="nav-number">2.</span> <span class="nav-text">下面给出一种常用的方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大致证明："><span class="nav-number">3.</span> <span class="nav-text">大致证明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
             
 
           </div>

@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="YKgsmUDq&#39;blog">
 <meta property="og:description" content="概念SAT的全称是Satisfiability。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-29T12:29:05.472Z">
+<meta property="og:updated_time" content="2017-07-30T11:30:00.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2-sat">
 <meta name="twitter:description" content="概念SAT的全称是Satisfiability。">
@@ -363,15 +363,15 @@
 <p>同理，当每个条件都只有两种情况时，就是2-SAT问题。</p>
 <p>为什么只研究2-SAT而不研究M更大的SAT问题呢？</p>
 <p>因为当$M\ge3$时，这是<a href="http://baike.baidu.com/view/272414.html" target="_blank" rel="external">NP完全问题</a>。</p>
-<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a><strong>算法</strong></h3><p>很简单，将有必选关系的点连边，然后枚举每个点跑一遍看有没有冲突就行了。</p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a><strong>算法</strong></h3><p>很简单，将有必选关系的点连边，然后随便选一个条件的一个情况跑一遍看有没有冲突，有的话就换一个情况跑。</p>
 <p>讲得太简单了？</p>
 <p>那我再详细点：</p>
 <p>还是像上面的那个问题，但规定$M$为$2$（不是2就不是2-SAT问题）。</p>
-<p>若$A$国的代表$A_1$与$B$国的代表$B_1$有冲突，不难发现，如果国派的是$A_1$，那国只能派$B_2$，所以就在$A_1B_2$间连一条有向边从$A_1$指向$B_2$，表示选$A_1$就必选$B_2$。同理，选$B_1$必选$A_2$，这就是必选关系。</p>
-<p>连好边之后就枚举每个还没确定代表（情况）国家（条件），随便选一个代表（情况），然后沿必选关系往下走，如果发现有冲突（访问某个国家的另一个代表也是必选的），就退出，换另一个代表试。如果两个代表都不行，</p>
-<p>那你可能要问了，为什么是换这个国家的代表，不换之前选过的？</p>
-<p>其实不难看出，这个图是对称的，所以换那个都无所谓（实在还不懂就自己建个图看一看，推一推）。</p>
-<p>例题：<a href="https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=1212" target="_blank" rel="external">UVaLive3211</a>（这里<a href="http://ykgsmudq.com/UVaLive3211/" target="_blank" rel="external">题解</a>）</p>
+<p>若$A$国的代表$A_1$与$B$国的代表$B_1$有冲突，那么就可以知道，如果国派的是代表$A_1$，那国能且只能派代表$B_2$，所以就在代表$A_1B_2$间连一条有向边，从$A_1$指向$B_2$，表示选$A_1$就必选$B_2$。同理，选$B_1$必选$A_2$，这就是必选关系。</p>
+<p>连好边之后就枚举每个还没确定代表（情况）国家（条件）。对于当前国家（条件），先随便选一个代表（情况），然后沿必选关系往下走，如果发现有冲突（访问到某个国家，发现其另一个代表也是必选的），就返回，换另一个代表试。如果两个代表都不行，就说明不存在合法情况。</p>
+<p>这时你可能要问了，为什么是换当前国家的代表，不换之前选过的？</p>
+<p>其实不难看出，这个图是对称的，所以出现冲突时换哪个国家的代表都无所谓（实在还不懂的，可以自己建个图看一看，推一推）。</p>
+<p>例题：<a href="https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=1212" target="_blank" rel="external">UVaLive 3211</a>（这里<a href="http://ykgsmudq.com/UVaLive3211" target="_blank" rel="external">题解</a>）</p>
 
       
     </div>
