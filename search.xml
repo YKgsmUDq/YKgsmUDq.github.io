@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[求树的直径]]></title>
+    <url>%2F%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%2F</url>
+    <content type="text"><![CDATA[树的直径指的是一棵树相隔最远的两个点的距离。 一开始我傻傻逼逼地用两次DFS做DP求QAQ。 第一次dfs求出某一点的离它最远点的编号及距离是多少，第二远的点编号及距离，它的父亲等一大堆数据。 第二次dfs进行转移。 麻烦的一匹QAQ 后来听大佬所才知道有更好的方法。。。 正题这个方法好太多了QAQ 操作一样是两次dfs。 随便找一个点$v$。 第一次dfs找到离这个最远的点$u_1$。 第二次dfs找到离点$u_1$最远的点$u_2$。 $u_1$与$u_2$的距离就是这棵树的直径。。。 证明自己证去。。。 假设点$v$ 到$u_1u_2$这条路径最近的点为$k$]]></content>
+      <categories>
+        <category>技巧</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[枚举一个集合的子集]]></title>
+    <url>%2F%E6%9E%9A%E4%B8%BE%E4%B8%80%E4%B8%AA%E9%9B%86%E5%90%88%E7%9A%84%E5%AD%90%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[打了个比赛没认真结果爆零QAQ，学到了QAQ。 对于我们在状压枚举枚举到的一个集合$S$，如何枚举它的子集$S’$？？？ code12345for(int s=1;s&lt;=1&lt;&lt;n;s++) for(int s1=s;s&gt;0;s=(s-1)&amp;s) &#123; //搞事 &#125; 时间复杂度：$o(3^n)$ 算法证明其实对于一个集合$S=“100111”$，由于在二进制里，$0$是可以用来“传递”$1$的，所以用&amp;运算来忽略掉集合$S$里面的$0$，把它变成$“1111”$，然后就可以不断减$1$，来达到枚举的效果。 时间证明$\sum_{i=0}^n Cn^i\cdot2^i=\sum{i=0}^n C_n^i\cdot2^i\cdot1^{n-i}$ 根据二项式定理（百度百科）：$\sum_{i=0}^n C_n^i\cdot2^i\cdot1^{n-i}=(2+1)^n=3^n$]]></content>
+      <categories>
+        <category>技巧</category>
+      </categories>
+      <tags>
+        <tag>状态压缩</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[BZOJ3110]]></title>
+    <url>%2FBZOJ3110%2F</url>
+    <content type="text"><![CDATA[题目传送门 Description有N个位置，M个操作。 操作有两种： 1：在位置a到位置b加入一个数c。 2：询问位置a到位置b，第c大的数是什么。 Input第一行，两个整数$N$，$M$，意义如上。 接下来$M$行，每行形如：1 a b c或2 a b c。第一个数为1时执行第一个操作，为2时执行第2个操作。 Output输出每个询问的结果 Solution嵌套数据结构经典题目。 一开始想的是用区间线段树套权值线段树，发觉搞不了。 后来听大佬说后发现可以用权值树套区间数。然后用二分查找找到第c大数。 因为如果节点直接全开会爆空间而且有很多浪费，所以需要动态开空间。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;using namespace std;const int maxn=40*50000+10;long long int n,m;struct TREE2&#123; long long int sum,lazy; TREE2 *lsun,*rsun;&#125;;struct TREE1&#123; TREE2 *ROOT;&#125;tree[maxn];struct IntervalTree2D&#123; long long int x,y,x1,ans,sum; long long query2(TREE2 *v,long long int l,long long int r) &#123; if(v==NULL) return 0; if(l&gt;=x&amp;&amp;r&lt;=y) return v-&gt;sum; long long int k=0,mid=(l+r)/2; if(v-&gt;lazy) &#123; if(v-&gt;lsun==NULL) v-&gt;lsun=new TREE2(); if(v-&gt;rsun==NULL) v-&gt;rsun=new TREE2(); v-&gt;lsun-&gt;sum+=v-&gt;lazy*(mid-l+1); v-&gt;rsun-&gt;sum+=v-&gt;lazy*(r-mid); v-&gt;lsun-&gt;lazy+=v-&gt;lazy; v-&gt;rsun-&gt;lazy+=v-&gt;lazy; v-&gt;lazy=0; &#125; if(x&lt;=mid) k+=query2(v-&gt;lsun,l,mid); if(y&gt;mid) k+=query2(v-&gt;rsun,mid+1,r); return k; &#125; void query1(long long int num,long long int l,long long int r) &#123; if(l==r) &#123;ans=l;return;&#125; long long sum1=query2(tree[num*2+1].ROOT,1,n); long long int mid=(r+l)/2; if(sum+sum1&gt;=x1) query1(num*2+1,mid+1,r); else &#123; sum+=sum1; query1(num*2,l,mid); &#125; &#125; void modify2(TREE2 *v,long long int l,long long int r) &#123; if(l&gt;=x&amp;&amp;r&lt;=y) &#123; v-&gt;lazy++; v-&gt;sum+=(r-l+1); return; &#125; long long int mid=(l+r)/2; if(v-&gt;lsun==NULL) v-&gt;lsun=new TREE2(); if(v-&gt;rsun==NULL) v-&gt;rsun=new TREE2(); if(v-&gt;lazy) &#123; v-&gt;lsun-&gt;sum+=v-&gt;lazy*(mid-l+1); v-&gt;rsun-&gt;sum+=v-&gt;lazy*(r-mid); v-&gt;lsun-&gt;lazy+=v-&gt;lazy; v-&gt;rsun-&gt;lazy+=v-&gt;lazy; v-&gt;lazy=0; &#125; if(mid&gt;=x) modify2(v-&gt;lsun,l,mid); if(mid&lt;y) modify2(v-&gt;rsun,mid+1,r); v-&gt;sum=v-&gt;lsun-&gt;sum+v-&gt;rsun-&gt;sum; &#125; void modify1(long long int num,long long int l,long long int r) &#123; if(tree[num].ROOT==NULL) tree[num].ROOT=new TREE2(); if(l==r)&#123; modify2(tree[num].ROOT,1,n);return;&#125; long long int mid=(l+r)/2; if(x1&lt;=mid) modify1(num*2,l,mid); else modify1(num*2+1,mid+1,r); modify2(tree[num].ROOT,1,n); &#125;&#125;t;struct FFF&#123; long long int q,x,y,z;&#125;que[maxn];struct FFFF&#123; long long int v,num;&#125;list[maxn];int lnum;bool cmp(FFFF a,FFFF b)&#123; return a.v&lt;b.v;&#125;long long int turn[maxn];int main()&#123; scanf("%lld%lld",&amp;n,&amp;m); for(int i=1;i&lt;=m;i++) &#123; scanf("%lld%lld%lld%lld",&amp;que[i].q,&amp;que[i].x,&amp;que[i].y,&amp;que[i].z); if(que[i].q==1) &#123; list[++lnum].v=que[i].z; list[lnum].num=i; &#125; &#125; sort(list+1,list+1+lnum,cmp); long long int c=1; turn[1]=list[1].v; que[list[1].num].z=1; for(int i=2;i&lt;=lnum;i++) &#123; if(list[i].v!=list[i-1].v) &#123; c++; turn[c]=list[i].v; &#125; que[list[i].num].z=c; &#125; for(int i=1;i&lt;=m;i++) &#123; long long int k=que[i].q; t.x=que[i].x; t.y=que[i].y; t.x1=que[i].z; if(k==1) t.modify1(1,1,n); else &#123; t.sum=0; t.query1(1,1,n); printf("%lld\n",turn[t.ans]); &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>树套树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[嵌套数据结构]]></title>
+    <url>%2F%E5%B5%8C%E5%A5%97%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%2F</url>
+    <content type="text"><![CDATA[嵌套数据结构就是在一个数据结构的每个节点下再构建一个结构。 由于很多嵌套数据结构都是一棵树套另一棵树，所以也有人直接叫树套树。 如线段树套线段树，就是在以一棵节点数为$n$的线段树的每一个节点为根，再建$n$棵线段树。 如图： 红边红点为主线段树。 嵌套数据结构所用的数据结构都是学过的，像线段树套平衡树，树状数组套平衡树。 只是上层的数据结构的每个节点保存的是另一个完整的数据结构。 嵌套数据结构实现很简单，这里就不多说了。至于用什么数据结构，具体看题目。 例题：UVa11297、BZOJ3110（题解）]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>树套树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[noip2013货车运输]]></title>
     <url>%2Fnoip2013%E8%B4%A7%E8%BD%A6%E8%BF%90%E8%BE%93%2F</url>
     <content type="text"><![CDATA[noip2013货车运输 Description给你一个由$n$个点，$m$条边组成的无向图，再给你$q$个询问，问你某两个点之间的所有路径中权值最小的边最大是多少？ 若两点不连通则输出$-1$。 Input第一行：两个整数$n,m$，表示点数和边数。 接下来$m$行：每行三个整数$a,b,c$，表示点$a$与点$b$之间有一条权值为$c$的边。 接下来一行：一个整数$q$，表示$q$个询问。 接下来$q$行：每行两个整数$a,b$，表示询问的两个点。 Output$q$行，对应每组询问的答案。 Solution要使路径中最小的边尽量大，做一遍最大生成树把不必要的边去掉，依照最大生成树的定义，我们可以知道在这棵树上两点之间的路径边权最小的边一定是最优的。 简化之后问题就是如何快速求树上两点之间的路径最小的边权。 直接算$lca$吧，在算$2^i$的祖先的同时可以顺便求一下某个点与它祖先之间的路径的最小边权。 最后对于询问的两点，就求$lca$，在求$lca$的同时也求路径上最小的边权。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;string.h&gt;#include&lt;algorithm&gt;#include&lt;math.h&gt;#define INF 1e9using namespace std;const int maxn=10010;const int maxm=50010;struct TREE&#123; int u,v,d; TREE *last;&#125;tree[maxn*2];TREE *root[maxn];int tl=0;void input(int u,int v,int d)&#123; tree[++tl].u=u; tree[tl].v=v; tree[tl].d=d; tree[tl].last=root[u]; root[u]=&amp;tree[tl];&#125;struct Edge&#123; int u,v,d;&#125;edge[maxm];bool cmp(Edge a,Edge b)&#123; return a.d&gt;b.d;&#125;int n,m,q;int set[maxn];int FH(int x)&#123; return set[x]==x?x:(set[x]=FH(set[x]));&#125;void Kruskal()&#123; for(int i=1;i&lt;=n;i++) set[i]=i; for(int i=1;i&lt;=m;i++) &#123; int u=edge[i].u,v=edge[i].v,d=edge[i].d; int fu=FH(u),fv=FH(v); if(fu!=fv) &#123; input(u,v,d); input(v,u,d); set[fu]=fv; &#125; &#125;&#125;int lca[maxn][30],deep[maxn],minD[maxn][30];bool vis[maxn];void LCA_dfs(int u,int fa)&#123; vis[u]=1; lca[u][1]=fa; deep[u]=deep[fa]+1; for(TREE *k=root[u];k!=NULL;k=k-&gt;last) &#123; if(vis[k-&gt;v]) continue; LCA_dfs(k-&gt;v,u); minD[k-&gt;v][1]=k-&gt;d; &#125;&#125;void LCA()&#123; for(int i=1;i&lt;=n;i++) if(!vis[i]) LCA_dfs(i,0); for(int i=2;i&lt;=20;i++) for(int j=1;j&lt;=n;j++) &#123; lca[j][i]=lca[lca[j][i-1]][i-1]; minD[j][i]=min(minD[j][i-1],minD[lca[j][i-1]][i-1]); &#125;&#125;int findlca(int x,int y)&#123; int ans=INF; if(deep[x]&lt;deep[y]) swap(x,y); for(int i=20;i&gt;0;i--) &#123; if(deep[lca[x][i]]&lt;deep[y]) continue; ans=min(ans,minD[x][i]); x=lca[x][i]; &#125; if(x==y) return ans; for(int i=20;i&gt;0;i--) &#123; if(lca[x][i]==lca[y][i]) continue; ans=min(ans,min(minD[x][i],minD[y][i])); x=lca[x][i],y=lca[y][i]; &#125; ans=min(ans,min(minD[x][1],minD[y][1])); return ans;&#125;void init()&#123; for(int i=0;i&lt;maxn;i++) for(int j=0;j&lt;30;j++) minD[i][j]=INF;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); init(); for(int i=1;i&lt;=m;i++) scanf("%d%d%d",&amp;edge[i].u,&amp;edge[i].v,&amp;edge[i].d); sort(edge+1,edge+1+m,cmp); Kruskal(); LCA(); scanf("%d",&amp;q); while(q--) &#123; int x,y; scanf("%d%d",&amp;x,&amp;y); if(FH(x)!=FH(y)) printf("-1\n"); else printf("%d\n",findlca(x,y)); &#125; return 0;&#125;]]></content>
