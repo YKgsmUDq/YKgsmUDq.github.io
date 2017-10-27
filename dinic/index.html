@@ -2,10 +2,8 @@
 
 
 
-  
 
-
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next mist" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -96,7 +94,7 @@
 <meta property="og:description" content="dinic 求最大流。 先引入两个概念：层次图、阻塞流。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://otc0j46od.bkt.clouddn.com/dinic.png">
-<meta property="og:updated_time" content="2017-07-30T11:31:20.047Z">
+<meta property="og:updated_time" content="2017-10-27T11:04:28.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dinic">
 <meta name="twitter:description" content="dinic 求最大流。 先引入两个概念：层次图、阻塞流。">
@@ -111,7 +109,7 @@
     scheme: 'Mist',
     sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
-    motion: true,
+    motion: false,
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -371,7 +369,7 @@
 <p>然后，dinic每次增广都可以将其中某一层连向下一层的边都流满，所以最多建$N$次层次图。</p>
 <p>最后，dinic还可以进行当前弧优化，进一步压缩时间。</p>
 <h4 id="当前弧优化"><a href="#当前弧优化" class="headerlink" title="当前弧优化"></a>当前弧优化</h4><p>在一次DFS中，当某个点所有流出的边都满了，就退出，不要再流这个点了。</p>
-<p>例题：<a href="http://poj.org/problem?id=1273" target="_blank" rel="external">POJ1273</a>（这里<a href="http://ykgsmudq.com/POJ1273" target="_blank" rel="external">题解</a>）</p>
+<p>例题：<a href="http://poj.org/problem?id=1273" target="_blank" rel="external">POJ1273</a>（<a href="http://ykgsmudq.com/POJ1273" target="_blank" rel="external">题解戳这</a>）</p>
 
       
     </div>
@@ -500,7 +498,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -522,7 +520,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -691,8 +689,6 @@
   
 
 
-  
-
 
 
 
@@ -714,9 +710,6 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   

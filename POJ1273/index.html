@@ -2,10 +2,8 @@
 
 
 
-  
 
-
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next mist" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -71,7 +69,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="图论,网络流," />
+  <meta name="keywords" content="图论,最大流," />
 
 
 
@@ -88,14 +86,14 @@
 
 
 <meta name="description" content="题目传送门">
-<meta name="keywords" content="图论,网络流">
+<meta name="keywords" content="图论,最大流">
 <meta property="og:type" content="article">
 <meta property="og:title" content="POJ1273 Drainage Ditches">
 <meta property="og:url" content="http://yoursite.com/POJ1273/index.html">
 <meta property="og:site_name" content="YKgsmUDq&#39;blog">
 <meta property="og:description" content="题目传送门">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-31T15:48:25.610Z">
+<meta property="og:updated_time" content="2017-10-27T11:04:50.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="POJ1273 Drainage Ditches">
 <meta name="twitter:description" content="题目传送门">
@@ -109,7 +107,7 @@
     scheme: 'Mist',
     sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
-    motion: true,
+    motion: false,
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -356,7 +354,7 @@
 <p>整个排水系统由$N$个点，$M$条排水管道组成。</p>
 <p>除起点和终点每个点每的排水量和入水量要一致，时刻每条管道有一个单位时间最大排水量$f$。</p>
 <p>Bessie的田就是起点$v_1$，终点是一条小溪点$v_n$。</p>
-<p>求单位时间整个排水系统单位时间最大排水量。</p>
+<p>求整个排水系统单位时间最大排水量。</p>
 <h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>第一行：两个整数，$M$和$N$，意义如题。</p>
 <p>接下来$M$行：每行三个整数，$S$、$E$和$C$，表示点$S$和点$E$之间有条容量为$C$的排水管道。</p>
 <h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>一行：一个整数，最大排水量。</p>
@@ -393,7 +391,7 @@
           
             <a href="/tags/图论/" rel="tag"># 图论</a>
           
-            <a href="/tags/网络流/" rel="tag"># 网络流</a>
+            <a href="/tags/最大流/" rel="tag"># 最大流</a>
           
         </div>
       
@@ -406,8 +404,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/UVaLive3523/" rel="next" title="UVaLive3523 Knights of the Round Table">
-                <i class="fa fa-chevron-left"></i> UVaLive3523 Knights of the Round Table
+              <a href="/UVaLive3523/" rel="next" title="UVaLive3523">
+                <i class="fa fa-chevron-left"></i> UVaLive3523
               </a>
             
           </div>
@@ -490,7 +488,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -512,7 +510,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -681,8 +679,6 @@
   
 
 
-  
-
 
 
 
@@ -704,9 +700,6 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
