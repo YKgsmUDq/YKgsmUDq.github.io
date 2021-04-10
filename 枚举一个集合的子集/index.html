@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="YKgsmUDq&#39;blog">
 <meta property="og:description" content="打了个比赛没认真结果爆零QAQ，学到了QAQ。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-16T05:23:16.000Z">
+<meta property="og:updated_time" content="2021-04-10T08:24:06.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="枚举一个集合的子集">
 <meta name="twitter:description" content="打了个比赛没认真结果爆零QAQ，学到了QAQ。">
@@ -351,10 +351,10 @@
         <p>打了个比赛<del>没认真结果爆零QAQ</del>，学到了QAQ。</p>
 <a id="more"></a>
 <p>对于我们在状压枚举枚举到的一个集合$S$，如何枚举它的子集$S’$？？？</p>
-<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;=<span class="number">1</span>&lt;&lt;n;s++)</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> s1=s;s&gt;<span class="number">0</span>;s=(s<span class="number">-1</span>)&amp;s)</div><div class="line">  &#123;</div><div class="line">     <span class="comment">//搞事</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">1</span>;s&lt;=<span class="number">1</span>&lt;&lt;n;s++)</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> s1=s;s1&gt;<span class="number">0</span>;s1=(s1<span class="number">-1</span>)&amp;s)</div><div class="line">  &#123;</div><div class="line">     <span class="comment">//搞事</span></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <p>时间复杂度：$o(3^n)$</p>
 <h3 id="算法证明"><a href="#算法证明" class="headerlink" title="算法证明"></a>算法证明</h3><p>其实对于一个集合$S=“100111”$，由于在二进制里，$0$是可以用来“传递”$1$的，所以用&amp;运算来忽略掉集合$S$里面的$0$，把它变成$“1111”$，然后就可以不断减$1$，来达到枚举的效果。</p>
-<h3 id="时间证明"><a href="#时间证明" class="headerlink" title="时间证明"></a>时间证明</h3><p>$\sum_{i=0}^n C<em>n^i\cdot2^i=\sum</em>{i=0}^n C_n^i\cdot2^i\cdot1^{n-i}$</p>
+<h3 id="时间证明"><a href="#时间证明" class="headerlink" title="时间证明"></a>时间证明</h3><p>显然：$\sum_{i=0}^n C<em>n^i\cdot2^i=\sum</em>{i=0}^n C_n^i\cdot2^i\cdot1^{n-i}$</p>
 <p>根据二项式定理（<a href="https://baike.baidu.com/item/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86/7134359?fr=aladdin" target="_blank" rel="external">百度百科</a>）：$\sum_{i=0}^n C_n^i\cdot2^i\cdot1^{n-i}=(2+1)^n=3^n$</p>
 
       

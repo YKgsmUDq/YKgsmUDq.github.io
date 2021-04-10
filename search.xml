@@ -19,8 +19,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>莫队算法</tag>
         <tag>主席树</tag>
+        <tag>莫队算法</tag>
         <tag>分块</tag>
         <tag>离线</tag>
       </tags>
@@ -75,7 +75,7 @@
   <entry>
     <title><![CDATA[枚举一个集合的子集]]></title>
     <url>%2F%E6%9E%9A%E4%B8%BE%E4%B8%80%E4%B8%AA%E9%9B%86%E5%90%88%E7%9A%84%E5%AD%90%E9%9B%86%2F</url>
-    <content type="text"><![CDATA[打了个比赛没认真结果爆零QAQ，学到了QAQ。 对于我们在状压枚举枚举到的一个集合$S$，如何枚举它的子集$S’$？？？ code12345for(int s=1;s&lt;=1&lt;&lt;n;s++) for(int s1=s;s&gt;0;s=(s-1)&amp;s) &#123; //搞事 &#125; 时间复杂度：$o(3^n)$ 算法证明其实对于一个集合$S=“100111”$，由于在二进制里，$0$是可以用来“传递”$1$的，所以用&amp;运算来忽略掉集合$S$里面的$0$，把它变成$“1111”$，然后就可以不断减$1$，来达到枚举的效果。 时间证明$\sum_{i=0}^n Cn^i\cdot2^i=\sum{i=0}^n C_n^i\cdot2^i\cdot1^{n-i}$ 根据二项式定理（百度百科）：$\sum_{i=0}^n C_n^i\cdot2^i\cdot1^{n-i}=(2+1)^n=3^n$]]></content>
+    <content type="text"><![CDATA[打了个比赛没认真结果爆零QAQ，学到了QAQ。 对于我们在状压枚举枚举到的一个集合$S$，如何枚举它的子集$S’$？？？ code12345for(int s=1;s&lt;=1&lt;&lt;n;s++) for(int s1=s;s1&gt;0;s1=(s1-1)&amp;s) &#123; //搞事 &#125; 时间复杂度：$o(3^n)$ 算法证明其实对于一个集合$S=“100111”$，由于在二进制里，$0$是可以用来“传递”$1$的，所以用&amp;运算来忽略掉集合$S$里面的$0$，把它变成$“1111”$，然后就可以不断减$1$，来达到枚举的效果。 时间证明显然：$\sum_{i=0}^n Cn^i\cdot2^i=\sum{i=0}^n C_n^i\cdot2^i\cdot1^{n-i}$ 根据二项式定理（百度百科）：$\sum_{i=0}^n C_n^i\cdot2^i\cdot1^{n-i}=(2+1)^n=3^n$]]></content>
       <categories>
         <category>技巧</category>
       </categories>
