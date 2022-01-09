@@ -2,8 +2,10 @@
 
 
 
+  
 
-<html class="theme-next mist" lang="zh-Hans">
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -105,7 +107,7 @@
     scheme: 'Mist',
     sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
-    motion: false,
+    motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -936,25 +938,14 @@
 
       
         
-          
-            <p><a href="https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=1943" target="_blank" rel="external">题目传送门</a></p>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>给你一条由小写字母组成的长字符串$S$（长度不超过$300000$），再给你$N$（$1\leq N\leq4000$）条短字符串$C_i$（每条长度不超过$100$），用$C_i$组成$S$，问有多少种方法，结果对$20071027$取模。</p>
-<p>如：$S$为$abcd$，$C_i$分别为：$a,b,ab,cd$时。那么有$a+b+cd$和$ab+cd$两种方法。</p>
-<p>多组测试数据。</p>
-<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p>每组测试数据：</p>
-<p>第一行：一个字符串，$S$ 。</p>
-<p>第二行：一个整数，$N$ 。</p>
-<p>接下来$N$行：每行一字条符串$C_i$ 。</p>
-<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p>若干行：</p>
-<p>每行格式为：”$Case$ $i$$:$ $ans$”（不含引号）。</p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>看到方案数就可以想到用$DP$，这题有点像背包问题，用$F_i$表示：从$S_0$到$S_i$有多少种组合方法。则：</p>
-<h4 id="Fi-sum-F-i-len-C-j-Cj-F-i-lenC-J…i"><a href="#Fi-sum-F-i-len-C-j-Cj-F-i-lenC-J…i" class="headerlink" title="$Fi$=sum{$F{ i-len(C_j) }$|$Cj=F{ i-lenC_J…i }$}"></a>$F<em>i$=sum{$F</em>{ i-len(C_j) }$|$C<em>j=F</em>{ i-lenC_J…i }$}</h4><p>显然每次求都搜索一遍$C_i$匹配一遍会超时时了。</p>
-<p>这就要用到$trie$了。</p>
-<p>把$C$全部组织成一棵$trie$，枚举$S$的起始点$i$，在$trie$上从$S_i$开始匹配，若匹配到$S_j$时可以匹配到一个完整的$C<em>k$就可以用$F</em>{j-len(C_k)}$更新$F_j$了。</p>
-<p>因为$len(C_i)$不超过$100$，所以在$trie$上匹配的次数不超过$100$，不会超时。</p>
-<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxL=<span class="number">300100</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxl=<span class="number">110</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">4010</span>;</div><div class="line"></div><div class="line"><span class="keyword">char</span> str1[maxL],word[maxn][maxl];</div><div class="line"><span class="keyword">int</span> trie[maxn*maxl][<span class="number">30</span>],sz,check[maxn*maxl],q,L; </div><div class="line"><span class="keyword">int</span> n;</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> f[maxL];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">T</span><span class="params">(<span class="keyword">char</span> a)</span></span></div><div class="line">&#123;<span class="keyword">return</span> <span class="keyword">int</span>(a-<span class="string">'a'</span>);&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">maketrie</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> u=<span class="number">0</span>,N=<span class="built_in">strlen</span>(word[x]);</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(!trie[u][T(word[x][i])])</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">memset</span>(trie[++sz],<span class="number">0</span>,<span class="keyword">sizeof</span>(trie[sz]));</div><div class="line">			check[sz]=<span class="number">0</span>;</div><div class="line">			trie[u][T(word[x][i])]=sz;</div><div class="line">		&#125;</div><div class="line">		u=trie[u][T(word[x][i])];</div><div class="line">	&#125;</div><div class="line">	check[u]++;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> u=<span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;trie[u][T(str1[x])]&amp;&amp;x&lt;L;i++,x++)</div><div class="line">	&#123;</div><div class="line">		u=trie[u][T(str1[x])];</div><div class="line">		<span class="keyword">if</span>(check[u])</div><div class="line">			f[x+<span class="number">1</span>]=(f[x+<span class="number">1</span>]+f[x+<span class="number">1</span>-i]*check[u])%<span class="number">20071027</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	sz=<span class="number">0</span>;</div><div class="line">	<span class="built_in">memset</span>(f,<span class="number">0</span>,<span class="keyword">sizeof</span>(f));</div><div class="line">	<span class="built_in">memset</span>(check,<span class="number">0</span>,<span class="keyword">sizeof</span>(check));</div><div class="line">	<span class="built_in">memset</span>(trie[<span class="number">0</span>],<span class="number">0</span>,<span class="keyword">sizeof</span>(trie[<span class="number">0</span>]));</div><div class="line">	f[<span class="number">0</span>]=<span class="number">1</span>;</div><div class="line">	q++;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s"</span>,str1)==<span class="number">1</span>)</div><div class="line">	&#123;</div><div class="line">		init();</div><div class="line">		L=<span class="built_in">strlen</span>(str1);</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">scanf</span>(<span class="string">"%s"</span>,word[i]);</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) maketrie(i);</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;L;i++) find(i);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"Case %d: %lld\n"</span>,q,f[L]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
+          <p><a href="https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=1943" target="_blank" rel="external">题目传送门</a></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/UVaLive3942/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1141,7 +1132,7 @@
         <div class="copyright" >
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-address-card"></i>
   </span>
@@ -1215,6 +1206,8 @@
   
 
 
+  
+
 
 
 
@@ -1236,6 +1229,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
